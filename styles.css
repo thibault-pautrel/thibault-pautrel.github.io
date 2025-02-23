@@ -22,7 +22,7 @@ h1 {
 
 /* Navigation Bar */
 nav {
-    background-color: #f8e9a1; /* Light yellow */
+    background-color: #A7C7E7; /* Light blue */
     padding: 10px 0;
 }
 
@@ -48,7 +48,7 @@ nav ul li a {
 
 nav ul li a:hover,
 nav ul li a.active {
-    background-color: #ffbe55;
+    background-color: #77A6D0; /* Darker light blue */
     color: black;
 }
 
@@ -75,6 +75,7 @@ p {
     font-size: 1.2rem;
     line-height: 1.6;
 }
+
 /* Teaching Page Styles */
 .course-list {
     margin-top: 20px;
@@ -85,7 +86,7 @@ p {
     background-color: white;
     padding: 15px;
     margin-bottom: 15px;
-    border-left: 5px solid #ffbe55; /* Accent color */
+    border-left: 5px solid #A7C7E7; /* Light blue accent */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }

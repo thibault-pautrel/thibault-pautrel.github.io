@@ -1,6 +1,48 @@
+/* General styles */
 body {
+    font-family: 'Inter', sans-serif;
+    background-color: #ffffff; /* White background */
+    color: #000000; /* Black text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     margin: 0;
-    background: pink;
-    text-align:center;
+}
 
+/* Container styling */
+.container {
+    text-align: center;
+}
+
+/* Header */
+h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Paragraph */
+p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+/* Links */
+.links a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #333; /* Dark Gray */
+    padding: 10px 15px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    margin: 5px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.links a:hover {
+    background-color: #333;
+    color: white;
 }

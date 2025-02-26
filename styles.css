@@ -1,48 +1,102 @@
-/* General styles */
+/* General Styles */
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #ffffff; /* White background */
-    color: #000000; /* Black text */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background-color: #f8f8f8;
+    color: #333;
     margin: 0;
-}
-
-/* Container styling */
-.container {
+    padding: 0;
     text-align: center;
 }
 
 /* Header */
+header {
+    background-color: #f1f1f1;
+    padding: 20px 0;
+}
+
 h1 {
     font-size: 2.5rem;
-    font-weight: 600;
-    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
 }
 
-/* Paragraph */
-p {
-    font-size: 1.2rem;
-    font-weight: 300;
-    margin-bottom: 20px;
+/* Navigation Bar */
+nav {
+    background-color: #A7C7E7; /* Light blue */
+    padding: 10px 0;
 }
 
-/* Links */
-.links a {
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
     text-decoration: none;
     font-size: 1.2rem;
-    color: #333; /* Dark Gray */
+    font-weight: 600;
+    color: #333;
     padding: 10px 15px;
-    border: 2px solid #333;
-    border-radius: 10px;
-    margin: 5px;
-    display: inline-block;
-    transition: all 0.3s ease;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
 }
 
-.links a:hover {
-    background-color: #333;
-    color: white;
+nav ul li a:hover,
+nav ul li a.active {
+    background-color: #77A6D0; /* Darker light blue */
+    color: black;
+}
+
+/* Main Content */
+main {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: left;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #444;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+}
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+/* Teaching Page Styles */
+.course-list {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.course {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-left: 5px solid #A7C7E7; /* Light blue accent */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.course h3 {
+    margin-bottom: 5px;
+    color: #444;
+}
+
+.course p {
+    font-size: 1.1rem;
+    color: #555;
 }

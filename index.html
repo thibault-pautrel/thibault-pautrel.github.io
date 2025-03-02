@@ -7,6 +7,29 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+        .text {
+            flex: 1;
+            padding-right: 20px;
+        }
+        .photo {
+            flex-shrink: 0;
+        }
+        .photo img {
+            width: 150px; /* Adjust as needed */
+            height: auto;
+            border-radius: 10px; /* Optional: rounded corners */
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Optional: shadow effect */
+        }
+    </style>
 </head>
 <body>
     <!-- HEADER -->
@@ -24,32 +47,38 @@
     </nav>
 
     <!-- MAIN CONTENT -->
-    <main>
-        <h2>Welcome to my personal page</h2>
+    <div class="container">
+        <div class="text">
+            <h2>Welcome to my personal page</h2>
+            <p>
+                I am currently an intern at the LISTIC laboratory in Annecy, under the supervision of 
+                Guillaume Ginolhac (LISTIC), Ammar Mian (LISTIC), and Florent Bouchard (Centrale-Supélec). 
+                My research focuses on Riemannian federated learning for time series analysis applications 
+                using remote sensing data.
+            </p>
 
-        <p>
-            I am currently an intern at the LISTIC laboratory in Annecy, under the supervision of 
-            Guillaume Ginolhac (LISTIC), Ammar Mian (LISTIC), and Florent Bouchard (Centrale-Supélec). 
-            My research focuses on Riemannian federated learning for time series analysis applications 
-            using remote sensing data.
-        </p>
+            <p>
+                This internship is part of ENSAI's <em>Master for Smart Data Science</em>, 
+                in which I have been enrolled since September 2024.
+            </p>
 
-        <p>
-            This internship is part of ENSAI's <em>Master for Smart Data Science</em>, 
-            in which I have been enrolled since September 2024.
-        </p>
+            <p>
+                Previously, I was a Ph.D. student at Université de Rennes 1 (IRMAR), 
+                under the supervision of Jürgen Angst and Guillaume Poly.
+            </p>
 
-        <p>
-            Previously, I was a Ph.D. student at Université de Rennes 1 (IRMAR), 
-            under the supervision of Jürgen Angst and Guillaume Poly.
-        </p>
+            <p>
+                My curriculum vitae can be found 
+                <a href="CV_English.pdf" target="_blank">here</a> in English 
+                and <a href="CV_French.pdf" target="_blank">here</a> in French.
+            </p>
+        </div>
 
-        <p>
-            My curriculum vitae can be found 
-            <a href="CVenglish.pdf" target="_blank">here</a> in English 
-            and <a href="CVTP.pdf" target="_blank">here</a> in French.
-        </p>
-    </main>
+        <!-- PHOTO SECTION -->
+        <div class="photo">
+            <img src="your_photo.jpg" alt="Thibault Pautrel">
+        </div>
+    </div>
 
 </body>
 </html>

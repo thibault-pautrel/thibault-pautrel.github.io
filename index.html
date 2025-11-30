@@ -1,94 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thibault Pautrel</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        .container {
-            display: flex;
-            align-items: left;
-            justify-content: space-between;
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-        }
-        .text {
-            flex: 1;
-            padding-right: 20px;
-        }
-        .photo {
-            flex-shrink: 0;
-        }
-        .photo img {
-            width: 150px; /* Adjust as needed */
-            height: auto;
-            border-radius: 10px; /* Optional: rounded corners */
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Optional: shadow effect */
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Personal page of Thibault Pautrel: postdoctoral researcher in federated learning, Riemannian geometry, and random functions.">
+  <title>Home – Thibault Pautrel</title>
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    .home-layout {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .home-text {
+      flex: 1;
+    }
+
+    .home-photo {
+      flex-shrink: 0;
+    }
+
+    .home-photo img {
+      width: 150px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 700px) {
+      .home-layout {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+      }
+
+      .home-photo img {
+        width: 140px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- HEADER -->
-    <header>
-        <h1>Thibault Pautrel</h1>
-    </header>
 
-    <!-- NAVIGATION BAR -->
-    <nav>
-        <ul>
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="research.html">Research</a></li>
-            <li><a href="teaching.html">Teaching</a></li>
-        </ul>
-    </nav>
-
-    <!-- MAIN CONTENT -->
+  <!-- HEADER -->
+  <header class="site-header">
     <div class="container">
-        <div class="text">
-            <h2>Welcome to my personal page</h2>
-            <p>
-                Since October 2025, I have been a postdoctoral researcher at the L2S research laboratory
-                <a href="https://l2s.centralesupelec.fr" target="_blank" rel="noopener noreferrer">https://l2s.centralesupelec.fr</a>.
-            </p>
-            <p>
-                My work focuses on federated learning on covariance matrices with
-                <a href="https://ojs.aaai.org/index.php/AAAI/article/view/10866" target="_blank" rel="noopener noreferrer">SPDNet</a>
-                for Riemannian models on health data (EEG).
-            </p>
+      <h1 class="site-title">
+        <a href="index.html">Thibault Pautrel</a>
+      </h1>
 
-            <p>
-                Previously, I was enrolled in the Master “Statistics for Smart Data” at
-                <a href="https://ensai.fr/2-cursus/msc-statistics-for-smart-data/" target="_blank" rel="noopener noreferrer">ENSAI (Rennes)</a>
-                to strengthen my background in machine learning and computer science.
-                Thanks to this program, I was able to transition from my previous position as a mathematics teacher in secondary education
-                and come back to the academic research world I had left after my PhD thesis.
-            </p>
-            <p>
-                In 2022, I was granted a PhD from the University of Rennes for my work on the universality of the zeros of random functions.
-                My PhD was supervised by
-                <a href="https://sites.google.com/site/guillaumejpoly/home" target="_blank" rel="noopener noreferrer">Guillaume Poly</a>
-                and
-                <a href="https://angst.pages.math.cnrs.fr" target="_blank" rel="noopener noreferrer">Jürgen Angst</a>,
-                and the manuscript can be found
-                <a href="https://theses.fr/2022REN1S015" target="_blank" rel="noopener noreferrer">here</a>.
-            </p>
-
-            <p>
-                My curriculum vitae can be found 
-                <a href="CVenglish.pdf" target="_blank" rel="noopener noreferrer">here</a> in English 
-                and <a href="CVTP.pdf" target="_blank" rel="noopener noreferrer">here</a> in French.
-            </p>
-        </div>
-
-        <!-- PHOTO SECTION -->
-        <div class="photo">
-            <img src="photoTP.jpg" alt="Thibault Pautrel">
-        </div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="teaching.html">Teaching</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main id="main-content" class="container">
+    <h2 class="page-title">Welcome</h2>
+
+    <section class="home-layout" aria-labelledby="intro-heading">
+      <div class="home-text">
+        <h3 id="intro-heading" style="margin-top: 0;">About me</h3>
+
+        <p>
+          Since October 2025, I have been a postdoctoral researcher at the
+          <a href="https://l2s.centralesupelec.fr" target="_blank" rel="noopener noreferrer">
+            L2S research laboratory (CentraleSupélec, Université Paris-Saclay)
+          </a>.
+        </p>
+
+        <p>
+          My current work focuses on federated learning on covariance matrices with
+          <a href="https://ojs.aaai.org/index.php/AAAI/article/view/10866" target="_blank" rel="noopener noreferrer">
+            SPDNet
+          </a>
+          and related Riemannian models, with applications to health data, in particular EEG signals.
+        </p>
+
+        <p>
+          Previously, I completed the Master’s program
+          <em>Statistics for Smart Data</em> at
+          <a href="https://ensai.fr/2-cursus/msc-statistics-for-smart-data/" target="_blank" rel="noopener noreferrer">
+            ENSAI (Rennes)
+          </a>
+          in order to strengthen my background in machine learning and computer science.
+          This training allowed me to transition from my former position as a secondary school
+          mathematics teacher back into academic research.
+        </p>
+
+        <p>
+          In 2022, I obtained my PhD from the University of Rennes for a thesis on the universality
+          of the zeros of random functions. My PhD was supervised by
+          <a href="https://sites.google.com/site/guillaumejpoly/home" target="_blank" rel="noopener noreferrer">
+            Guillaume Poly
+          </a>
+          and
+          <a href="https://angst.pages.math.cnrs.fr" target="_blank" rel="noopener noreferrer">
+            Jürgen Angst
+          </a>.
+          The manuscript is available
+          <a href="https://theses.fr/2022REN1S015" target="_blank" rel="noopener noreferrer">
+            here
+          </a>.
+        </p>
+
+        <p>
+          My curriculum vitae can be found
+          <a href="CVenglish.pdf" target="_blank" rel="noopener noreferrer">here</a> in English
+          and
+          <a href="CVTP.pdf" target="_blank" rel="noopener noreferrer">here</a> in French.
+        </p>
+      </div>
+
+      <!-- PHOTO SECTION -->
+      <div class="home-photo">
+        <img src="photoTP.jpg" alt="Portrait of Thibault Pautrel">
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 Thibault Pautrel</p>
+  </footer>
 
 </body>
 </html>
+

@@ -1,107 +1,340 @@
-/* General Styles */
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f8f8f8;
-    color: #333;
-    margin: 0;
-    padding: 0;
-    text-align: left;
+/* =========================
+   Base + Layout
+   ========================= */
+
+:root {
+  --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --color-text: #1f2933;
+  --color-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --color-accent: #276fbf;      /* Main accent blue */
+  --color-accent-soft: #e3efff; /* Soft blue background */
+  --color-header-bg: #f9fafb;
+  --color-body-bg: #f3f4f6;
+  --color-card-bg: #ffffff;
+  --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.06);
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --radius-sm: 4px;
 }
 
-/* Header */
-header {
-    background-color: #f1f1f1;
-    padding: 20px 0;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  background-color: var(--color-body-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* A general container class (used in header & main) */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* =========================
+   Typography & Links
+   ========================= */
+
+h1, h2, h3, h4 {
+  margin-top: 0;
+  font-weight: 600;
+  color: #111827;
 }
 
 h1 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #333;
-}
-
-/* Navigation Bar */
-nav {
-    background-color: #A7C7E7; /* Light blue */
-    padding: 10px 0;
-}
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-
-    display: flex;              /* NEW */
-    justify-content: center;    /* Center the tabs horizontally */
-}
-
-nav ul li {
-    /* no need for display: inline anymore */
-    margin: 0 15px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #333;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: 0.3s ease-in-out;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-    background-color: #77A6D0; /* Darker light blue */
-    color: black;
-}
-
-/* Main Content */
-main {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    text-align: left;
+  font-size: clamp(2.1rem, 2.8vw, 2.6rem);
+  letter-spacing: 0.02em;
 }
 
 h2 {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #444;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 5px;
+  font-size: 1.6rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.4rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 0.4rem;
+}
+
+h4 {
+  font-size: 1.1rem;
+  margin-top: 1.4rem;
+  margin-bottom: 0.3rem;
 }
 
 p {
-    font-size: 1.2rem;
-    line-height: 1.6;
+  font-size: 1rem;
+  margin: 0.4rem 0 0.6rem;
+  color: var(--color-text);
 }
 
-/* Teaching Page Styles */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1px;
+  background: var(--color-accent);
+  transition: width 0.2s ease;
+}
+
+a:hover,
+a:focus-visible {
+  color: #1d4f8f;
+}
+
+a:hover::after,
+a:focus-visible::after {
+  width: 100%;
+}
+
+/* Don’t underline nav links with the generic link underline effect */
+nav a::after,
+.main-nav a::after {
+  display: none;
+}
+
+/* Lists inside content */
+main ul {
+  padding-left: 1.3rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+
+main li {
+  margin-bottom: 0.4rem;
+}
+
+/* =========================
+   Header + Navigation
+   ========================= */
+
+/* Support both <header> and .site-header */
+header,
+.site-header {
+  background-color: var(--color-header-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-header .container,
+header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  gap: 1rem;
+}
+
+.site-title {
+  margin: 0;
+}
+
+.site-title a {
+  color: #111827;
+  text-decoration: none;
+}
+
+.site-title a:hover,
+.site-title a:focus-visible {
+  color: #111827;
+}
+
+/* Navigation – support both nav and .main-nav */
+nav,
+.main-nav {
+  font-size: 0.95rem;
+}
+
+nav ul,
+.main-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+nav li,
+.main-nav li {
+  margin: 0;
+}
+
+nav a,
+.main-nav a {
+  display: inline-block;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 500;
+  color: var(--color-muted);
+  background: transparent;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.1s ease;
+}
+
+nav a:hover,
+nav a:focus-visible,
+.main-nav a:hover,
+.main-nav a:focus-visible {
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+nav a.active,
+.main-nav a.active,
+nav a[aria-current="page"],
+.main-nav a[aria-current="page"] {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+/* =========================
+   Main Content Card
+   ========================= */
+
+main {
+  max-width: 960px;
+  margin: 2.5rem auto 3rem;
+  padding: 2rem 1.75rem;
+  background-color: var(--color-card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Optional page title style */
+.page-title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Section spacing */
+main section {
+  margin-top: 1.5rem;
+}
+
+/* Subtle highlight for current research / key sections */
+#current-research {
+  padding: 1.25rem 1rem;
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    135deg,
+    rgba(39, 111, 191, 0.03),
+    rgba(39, 111, 191, 0.01)
+  );
+  border: 1px solid rgba(39, 111, 191, 0.12);
+  margin-bottom: 1.75rem;
+}
+
+/* Publications lists a bit denser but readable */
+#publications ul {
+  padding-left: 1.1rem;
+}
+
+#publications li {
+  margin-bottom: 0.6rem;
+}
+
+/* Thesis section link emphasis */
+#thesis a {
+  font-weight: 500;
+}
+
+/* =========================
+   Teaching Page elements
+   ========================= */
+
 .course-list {
-    margin-top: 20px;
-    text-align: left;
+  margin-top: 1.5rem;
 }
 
 .course {
-    background-color: white;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-left: 5px solid #A7C7E7; /* Light blue accent */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+  background-color: var(--color-card-bg);
+  padding: 1rem 1.1rem;
+  margin-bottom: 1rem;
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--color-accent);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
 }
 
 .course h3 {
-    margin-bottom: 5px;
-    color: #444;
+  margin-top: 0;
+  margin-bottom: 0.3rem;
+  font-size: 1.05rem;
 }
 
 .course p {
-    font-size: 1.1rem;
-    color: #555;
+  margin-bottom: 0.2rem;
+  color: var(--color-muted);
 }
 
+/* =========================
+   Footer
+   ========================= */
+
+.site-footer {
+  text-align: center;
+  padding: 1.5rem 1rem 2rem;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 700px) {
+  .site-header .container,
+  header .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav ul,
+  .main-nav ul {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  main {
+    margin: 1.5rem auto 2.5rem;
+    padding: 1.5rem 1.25rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+}

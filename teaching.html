@@ -1,86 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teaching - Thibault Pautrel</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Teaching activities of Thibault Pautrel: university courses, supervision, and assessment roles in mathematics and machine learning.">
+  <title>Teaching – Thibault Pautrel</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- HEADER -->
-    <header>
-        <h1>Thibault Pautrel</h1>
-    </header>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title">
+        <a href="index.html">Thibault Pautrel</a>
+      </h1>
 
-    <!-- NAVIGATION BAR -->
-    <nav>
+      <nav class="main-nav" aria-label="Main navigation">
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="research.html">Research</a></li>
-            <li><a href="teaching.html" class="active">Teaching</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="teaching.html" class="active" aria-current="page">Teaching</a></li>
         </ul>
-    </nav>
+      </nav>
+    </div>
+  </header>
 
-    <!-- MAIN CONTENT -->
-    <main>
-        <h3>Current teaching (2025–2026)</h3>
-        <ul>
-            <li>
-                <strong>Introduction to programming with C++</strong> (computer lab sessions, 33 h), IUT d’Orsay.  
-                Topics: basic C++ syntax, control structures, functions, data structures, object-oriented programming, 
-                and implementation of classical searching and sorting algorithms.
-            </li>
-            <li>
-                <strong>Machine learning tutorials</strong> (12 h), second year (2A), CentraleSupélec.  
-                Topics: linear and logistic regression, supervised classification, support vector machines, 
-                dimensionality reduction, unsupervised learning, ensemble methods, and an introduction to deep learning.
-            </li>
-        </ul>
+  <!-- MAIN CONTENT -->
+  <main id="main-content" class="container">
+    <h2 class="page-title">Teaching</h2>
 
-        <h3>Previous teaching experience</h3>
-        <p>
-            Between September 2021 and July 2024, I was assigned as an “agrégé” mathematics teacher
-            to different secondary schools: Collège Saint-Exupéry (Villiers-le-Bel), Lycée Blaise Pascal
-            (Châteauroux) and Lycée Bernard Palissy (Gien).
-            The diversity of student levels helped me further develop my pedagogical skills.
-        </p>
+    <!-- Current teaching -->
+    <section id="current-teaching" aria-labelledby="current-teaching-heading">
+      <h3 id="current-teaching-heading">Current teaching (2025–2026)</h3>
 
-        <p>
-            Below are the courses that I taught during my PhD (64 hours/year) between September 2018 and
-            September 2021 for the
-            <a href="https://math.univ-rennes.fr" target="_blank" rel="noopener noreferrer">
-                mathematics department of the University of Rennes
-            </a>:
-        </p>
-        <ul>
-            <li>
-                Analysis and Probability (Taylor expansions, Riemann integrals, probability theory)
-                for second-year mathematics students (L2).
-            </li>
-            <li>
-                Probability (general theory, Bayes’ formula, Central Limit Theorem, Law of Large Numbers)
-                for first-year biology students (L1).
-            </li>
-        </ul>
+      <div class="course-list">
 
-        <h3>Supervision</h3>
-        <ul>
-            <li>
-                Supervision of study-and-research dissertations on Stein’s method for undergraduate
-                ENS Rennes students.
-            </li>
-            <li>
-                Preparation for the “agrégation” oral examination (Probability and Statistics option).
-            </li>
-        </ul>
+        <article class="course">
+          <h4>Introduction to programming with C++</h4>
+          <p><strong>Institution:</strong> IUT d’Orsay – computer lab sessions (33 h).</p>
+          <p><strong>Overview:</strong> Introductory course in algorithmic thinking and structured programming using modern C++.</p>
+          <p><strong>Topics include:</strong></p>
+          <ul>
+            <li>Basic C++ syntax, types, input/output.</li>
+            <li>Control structures (conditionals, loops).</li>
+            <li>Functions and modular program design.</li>
+            <li>Fundamental data structures (arrays, vectors, structs).</li>
+            <li>Introduction to object-oriented programming (classes, encapsulation).</li>
+            <li>Implementation of classical searching and sorting algorithms.</li>
+          </ul>
+        </article>
 
-        <h3>Assessment</h3>
-        <p>
-            Examiner for the Mathematics and Computer Science oral examinations (2023, 2024) and marker
-            for the written MP examinations (2023, 2024, 2025) for CentraleSupélec.
-        </p>
-    </main>
+        <article class="course">
+          <h4>Machine learning tutorials</h4>
+          <p><strong>Institution:</strong> CentraleSupélec – second year (2A), tutorials (12 h).</p>
+          <p><strong>Overview:</strong> Practical sessions accompanying a core introduction to machine learning.</p>
+          <p><strong>Topics include:</strong></p>
+          <ul>
+            <li>Linear and logistic regression, model evaluation.</li>
+            <li>Supervised classification and support vector machines.</li>
+            <li>Dimensionality reduction (e.g. PCA).</li>
+            <li>Unsupervised learning (clustering methods).</li>
+            <li>Ensemble methods (bagging, boosting, random forests).</li>
+            <li>Short introduction to deep learning concepts.</li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Previous teaching -->
+    <section id="previous-teaching" aria-labelledby="previous-teaching-heading">
+      <h3 id="previous-teaching-heading">Previous teaching experience</h3>
+
+      <p>
+        Between September 2021 and July 2024, I was assigned as an “agrégé” mathematics teacher
+        to different secondary schools: Collège Saint-Exupéry (Villiers-le-Bel), Lycée Blaise Pascal
+        (Châteauroux), and Lycée Bernard Palissy (Gien).
+        This diversity of student levels further strengthened my pedagogical skills and classroom experience.
+      </p>
+
+      <p>
+        During my PhD (September 2018 – September 2021), I taught 64 hours per year for the
+        <a href="https://math.univ-rennes.fr" target="_blank" rel="noopener noreferrer">
+          mathematics department of the University of Rennes
+        </a>:
+      </p>
+
+      <ul>
+        <li>
+          <strong>Analysis and Probability</strong> (L2 mathematics): Taylor expansions, Riemann integrals,
+          and introductory probability theory.
+        </li>
+        <li>
+          <strong>Probability</strong> (L1 biology): general probability theory, Bayes’ formula,
+          Central Limit Theorem, and Law of Large Numbers.
+        </li>
+      </ul>
+    </section>
+
+    <!-- Supervision -->
+    <section id="supervision" aria-labelledby="supervision-heading">
+      <h3 id="supervision-heading">Supervision</h3>
+      <ul>
+        <li>
+          Supervision of study-and-research dissertations on Stein’s method for undergraduate
+          ENS Rennes students.
+        </li>
+        <li>
+          Preparation for the “agrégation” oral examination (Probability and Statistics option).
+        </li>
+      </ul>
+    </section>
+
+    <!-- Assessment -->
+    <section id="assessment" aria-labelledby="assessment-heading">
+      <h3 id="assessment-heading">Assessment</h3>
+      <p>
+        Examiner for the Mathematics and Computer Science oral examinations (2023, 2024) and marker
+        for the written MP examinations (2023, 2024, 2025) for CentraleSupélec.
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 Thibault Pautrel</p>
+  </footer>
 
 </body>
 </html>

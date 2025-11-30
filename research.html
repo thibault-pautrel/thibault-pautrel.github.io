@@ -2,74 +2,86 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Research - Thibault Pautrel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Research of Thibault Pautrel: geometry-aware federated learning, Riemannian manifolds, random trigonometric polynomials, and related publications.">
+  <title>Research – Thibault Pautrel</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <header>
-    <h1>Thibault Pautrel</h1>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title">
+        <a href="index.html">Thibault Pautrel</a>
+      </h1>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html" class="active" aria-current="page">Research</a></li>
+          <li><a href="teaching.html">Teaching</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="research.html" class="active">Research</a></li>
-      <li><a href="teaching.html">Teaching</a></li>
-    </ul>
-  </nav>
+  <main id="main-content" class="container">
+    <h2 class="page-title">Research</h2>
 
-  <main>
-    
-    <h2>Current research</h2>
-
-<section id="current-research">
-  <p>
-    My current research focuses on geometry-aware federated learning for motor-imagery EEG classification.
-    I study federated training of SPDNet on covariance-based representations and compare it with Euclidean
-    baselines such as EEGNet, with a particular emphasis on Riemannian aggregation schemes that preserve
-    the Stiefel/SPD manifold geometry.
-  </p>
-  <p>
-    <strong>Keywords:</strong> federated learning, Riemannian manifolds, symmetric positive definite matrices, deep learning.
-  </p>
-</section>
-
-
-    <!-- Previous Research Activities Section -->
-    <section id="previous-research">
-      <h2>Previous research activities</h2>
-
-      <h3>Internship</h3>
+    <!-- Current research -->
+    <section id="current-research" aria-labelledby="current-research-heading">
+      <h3 id="current-research-heading">Current research</h3>
       <p>
-        <strong>Title:</strong>
-        Riemannian federated learning for time-series analysis applications with remote sensing data.
+        My current research focuses on geometry-aware federated learning for motor-imagery EEG classification.
+        I study federated training of SPDNet on covariance-based representations and compare it with Euclidean
+        baselines such as EEGNet, with a particular emphasis on Riemannian aggregation schemes that preserve
+        the Stiefel/SPD manifold geometry.
       </p>
       <p>
-        <strong>Institution:</strong>
-        University Savoie Mont Blanc, LISTIC laboratory (Annecy).
+        <strong>Keywords:</strong> federated learning, Riemannian manifolds,
+        symmetric positive definite matrices, deep learning.
       </p>
+    </section>
 
-      <h3>PhD thesis</h3>
-      <p>
-        <strong>Institution:</strong>
-        University of Rennes, IRMAR laboratory (Rennes).
-      </p>
-      <p>
-        <strong>Keywords:</strong>
-        nodal sets, random trigonometric polynomials, dependent stationary Gaussian processes,
-        spectral measures, Kac–Rice formula.
-      </p>
-      <p>
-        Invited speaker at the “UniRandom” thematic week (Rennes, 2019 and 2021).
-        Slides available
-        <a href="UNIRANDOMPautrel2021.pdf" target="_blank" rel="noopener noreferrer">
-          here
-        </a>.
-      </p>
+    <!-- Previous research -->
+    <section id="previous-research" aria-labelledby="previous-research-heading">
+      <h3 id="previous-research-heading">Previous research activities</h3>
 
-      <h2>Publications</h2>
+      <section aria-labelledby="internship-heading">
+        <h4 id="internship-heading">Internship</h4>
+        <p>
+          <strong>Title:</strong>
+          Riemannian federated learning for time-series analysis applications with remote sensing data.
+        </p>
+        <p>
+          <strong>Institution:</strong>
+          University Savoie Mont Blanc, LISTIC laboratory (Annecy).
+        </p>
+      </section>
+
+      <section aria-labelledby="phd-heading">
+        <h4 id="phd-heading">PhD thesis</h4>
+        <p>
+          <strong>Institution:</strong>
+          University of Rennes, IRMAR laboratory (Rennes).
+        </p>
+        <p>
+          <strong>Keywords:</strong>
+          nodal sets, random trigonometric polynomials, dependent stationary Gaussian processes,
+          spectral measures, Kac–Rice formula.
+        </p>
+        <p>
+          Invited speaker at the “UniRandom” thematic week (Rennes, 2019 and 2021).
+          Slides available
+          <a href="UNIRANDOMPautrel2021.pdf" target="_blank" rel="noopener noreferrer">here</a>.
+        </p>
+      </section>
+    </section>
+
+    <!-- Publications -->
+    <section id="publications" aria-labelledby="publications-heading">
+      <h3 id="publications-heading">Publications</h3>
+
       <ul>
         <li>
           T. Pautrel,
@@ -84,7 +96,7 @@
         </li>
       </ul>
 
-      <h3>To appear</h3>
+      <h4>To appear</h4>
       <ul>
         <li>
           J. Angst, T. Pautrel, G. Poly,
@@ -93,7 +105,7 @@
         </li>
       </ul>
 
-      <h3>Submitted</h3>
+      <h4>Submitted</h4>
       <ul>
         <li>
           T. Pautrel, F. Bouchard, A. Mian, G. Ginolhac,
@@ -101,50 +113,34 @@
           submitted to ICASSP 2026.
         </li>
       </ul>
+    </section>
 
-      <section id="thesis">
-        <h3>Thesis manuscript</h3>
-        <p>
-          You can download my PhD thesis manuscript
-          <a href="manuscritPAUTREL.pdf" target="_blank" rel="noopener noreferrer">
-            here (PDF)
-          </a>,
-          or consult it online at
-          <a href="https://theses.fr/2022REN1S015" target="_blank" rel="noopener noreferrer">
-            theses.fr/2022REN1S015
-          </a>.
-        </p>
-        <p>
-          The slides of the defense are available
-          <a href="BeamerPAUTRELv.finale.pdf" target="_blank" rel="noopener noreferrer">
-            here
-          </a>.
-        </p>
-      </section>
-
-      <h3>Master’s internship</h3>
+    <!-- Thesis -->
+    <section id="thesis" aria-labelledby="thesis-heading">
+      <h3 id="thesis-heading">Thesis manuscript</h3>
       <p>
-        <strong>Institution:</strong>
-        Université Savoie Mont Blanc, LAMA (Chambéry).
-      </p>
-      <p>
-        <strong>Keywords:</strong>
-        (backward) stochastic differential equations, Itô’s formula.
-      </p>
-      <p>
-        Internship report:
-        <a href="rapportstage.pdf" target="_blank" rel="noopener noreferrer">
-          Download report
+        You can download my PhD thesis manuscript
+        <a href="manuscritPAUTREL.pdf" target="_blank" rel="noopener noreferrer">
+          here (PDF)
+        </a>,
+        or consult it online at
+        <a href="https://theses.fr/2022REN1S015" target="_blank" rel="noopener noreferrer">
+          theses.fr/2022REN1S015
         </a>.
       </p>
       <p>
-        Defense slides:
-        <a href="beamersoutenancememoire.pdf" target="_blank" rel="noopener noreferrer">
-          Download slides
+        The slides of the defense are available
+        <a href="BeamerPAUTRELv.finale.pdf" target="_blank" rel="noopener noreferrer">
+          here
         </a>.
       </p>
     </section>
   </main>
 
+  <footer class="site-footer">
+    <p>&copy; 2025 Thibault Pautrel</p>
+  </footer>
+
 </body>
 </html>
+

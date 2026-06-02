@@ -342,7 +342,45 @@ main section {
   color: #4b5563;
   border: 1px solid #e5e7eb;
 }
+/* Repository badges (arXiv, HAL) */
+.repo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.15em 0.6em;
+  margin-right: 0.4em;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-weight: 500;
+  text-decoration: none;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
 
+.repo-badge:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.repo-badge--arxiv {
+  background-color: #b31b1b;
+  color: #ffffff;
+}
+
+.repo-badge--hal {
+  background-color: #1e3a5f;
+  color: #ffffff;
+}
+
+.repo-badge__label {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.repo-badge__id {
+  font-weight: 400;
+  opacity: 0.95;
+}
 /* =========================
    Publication groups
    ========================= */

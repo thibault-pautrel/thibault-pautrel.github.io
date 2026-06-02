@@ -381,6 +381,12 @@ main section {
   font-weight: 400;
   opacity: 0.95;
 }
+.pub-badges {
+  margin: 0.4em 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3em;
+}
 /* =========================
    Publication groups
    ========================= */

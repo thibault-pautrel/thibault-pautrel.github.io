@@ -305,9 +305,7 @@ main section {
 }
 
 .theme-section + .theme-section {
-  border-top: 1px solid var(--color-border);
-  padding-top: 1.75rem;
-  margin-top: 2.5rem;
+  margin-top: 4.5rem;
 }
 
 .theme-card {
@@ -327,6 +325,41 @@ main section {
   font-size: 1.35rem;
   margin-top: 0.4rem;
   margin-bottom: 0.6rem;
+}
+
+/* Numbered theme eyebrow (replaces section-label on theme cards) */
+.theme-eyebrow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  margin-bottom: 0.85rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.theme-number {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.theme-modifier {
+  font-weight: 500;
+  color: var(--color-muted);
+  position: relative;
+  padding-left: 0.95rem;
+}
+
+.theme-modifier::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0.5rem;
+  height: 1px;
+  background: var(--color-border);
+  transform: translateY(-50%);
 }
 
 .theme-subheading {

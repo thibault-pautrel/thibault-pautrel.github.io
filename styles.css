@@ -38,7 +38,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* A general container class (used in header & main) */
 .container {
   max-width: 960px;
   margin: 0 auto;
@@ -113,13 +112,12 @@ a:focus-visible::after {
   width: 100%;
 }
 
-/* Don’t underline nav links with the generic link underline effect */
 nav a::after,
-.main-nav a::after {
+.main-nav a::after,
+.theme-nav a::after {
   display: none;
 }
 
-/* Lists inside content */
 main ul {
   padding-left: 1.3rem;
   margin-top: 0.4rem;
@@ -134,7 +132,6 @@ main li {
    Header + Navigation
    ========================= */
 
-/* Support both <header> and .site-header */
 header,
 .site-header {
   background-color: var(--color-header-bg);
@@ -165,7 +162,6 @@ header .container {
   color: #111827;
 }
 
-/* Navigation – support both nav and .main-nav */
 nav,
 .main-nav {
   font-size: 0.95rem;
@@ -176,7 +172,6 @@ nav ul,
   list-style: none;
   margin: 0;
   padding: 0;
-
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -231,19 +226,17 @@ main {
   box-shadow: var(--shadow-soft);
 }
 
-/* Optional page title style */
 .page-title {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
 }
 
-/* Section spacing */
 main section {
   margin-top: 1.5rem;
 }
 
 /* =========================
-   Section headings
+   Section headings (legacy)
    ========================= */
 
 .section-heading {
@@ -256,7 +249,98 @@ main section {
 }
 
 /* =========================
-   Research / Teaching cards
+   Research intro + theme anchor nav
+   ========================= */
+
+.research-intro {
+  font-size: 1.02rem;
+  color: var(--color-text);
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  max-width: 65ch;
+}
+
+.theme-nav {
+  margin: 0 0 2.25rem;
+}
+
+.theme-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.theme-nav li {
+  margin: 0;
+}
+
+.theme-nav a {
+  display: inline-block;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.theme-nav a:hover,
+.theme-nav a:focus-visible {
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+/* =========================
+   Theme sections
+   ========================= */
+
+.theme-section {
+  margin-top: 2.5rem;
+  scroll-margin-top: 1.5rem;
+}
+
+.theme-section + .theme-section {
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.75rem;
+  margin-top: 2.5rem;
+}
+
+.theme-card {
+  padding: 1.5rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-card-bg);
+  margin-bottom: 1.25rem;
+}
+
+.theme-card--current {
+  background: linear-gradient(135deg, rgba(39, 111, 191, 0.04), rgba(39, 111, 191, 0.01));
+  border-color: rgba(39, 111, 191, 0.18);
+}
+
+.theme-title {
+  font-size: 1.35rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.theme-subheading {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  margin-top: 1.75rem;
+  margin-bottom: 0.6rem;
+}
+
+/* =========================
+   Research / Teaching cards (legacy)
    ========================= */
 
 .research-card {
@@ -342,6 +426,7 @@ main section {
   color: #4b5563;
   border: 1px solid #e5e7eb;
 }
+
 /* Repository badges (arXiv, HAL) */
 .repo-badge {
   display: inline-flex;
@@ -355,6 +440,10 @@ main section {
   text-decoration: none;
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.repo-badge::after {
+  display: none;
 }
 
 .repo-badge:hover {
@@ -381,14 +470,16 @@ main section {
   font-weight: 400;
   opacity: 0.95;
 }
+
 .pub-badges {
-  margin: 0.4em 0;
+  margin: 0.5rem 0 0;
   display: flex;
   flex-wrap: wrap;
   gap: 0.3em;
 }
+
 /* =========================
-   Publication groups
+   Publication groups (legacy status headers)
    ========================= */
 
 .pub-group {
@@ -421,6 +512,27 @@ main section {
   color: #15803d;
   background: #dcfce7;
 }
+
+/* =========================
+   Inline publication status tag
+   (used inside .pub-item)
+   ========================= */
+
+.pub-tag {
+  align-self: flex-start;
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: 0.3rem;
+}
+
+/* =========================
+   Publication list & items
+   ========================= */
 
 .pub-list {
   list-style: none;
@@ -459,6 +571,13 @@ main section {
 .pub-venue {
   font-size: 0.88rem;
   color: var(--color-muted);
+}
+
+.pub-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
 }
 
 /* =========================
@@ -574,5 +693,14 @@ main hr {
 
   .page-title {
     font-size: 1.5rem;
+  }
+
+  .theme-title {
+    font-size: 1.2rem;
+  }
+
+  .theme-nav a {
+    font-size: 0.82rem;
+    padding: 0.4rem 0.75rem;
   }
 }

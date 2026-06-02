@@ -688,6 +688,224 @@ main hr {
 }
 
 /* =========================
+   Theme figures (animated SVGs)
+   ========================= */
+
+.theme-figure {
+  margin: 1.75rem auto 1.25rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.theme-figure .figure-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+.theme-figure figcaption {
+  margin: 0.85rem auto 0;
+  max-width: 60ch;
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  line-height: 1.55;
+  font-style: italic;
+  text-align: center;
+}
+
+/* ----- Federated learning figure ----- */
+
+.figure-fl {
+  color: var(--color-accent);
+}
+
+.figure-fl .fl-lines line {
+  stroke: var(--color-border);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 5;
+}
+
+.figure-fl .fl-server rect {
+  fill: #ffffff;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  transform-origin: 400px 160px;
+  animation: fl-server-pulse 6s ease-in-out infinite;
+}
+
+.figure-fl .fl-client rect {
+  fill: #fafbfc;
+  stroke: var(--color-muted);
+  stroke-width: 1.4;
+  animation: fl-client-pulse 6s ease-in-out infinite;
+}
+
+.figure-fl .fl-c1 rect { transform-origin: 140px 70px; }
+.figure-fl .fl-c2 rect { transform-origin: 140px 250px; }
+.figure-fl .fl-c3 rect { transform-origin: 660px 70px; }
+.figure-fl .fl-c4 rect { transform-origin: 660px 250px; }
+
+.figure-fl .fl-label {
+  font-size: 14px;
+  font-weight: 600;
+  fill: #111827;
+  font-family: var(--font-body);
+}
+
+.figure-fl .fl-sublabel {
+  font-size: 11px;
+  fill: var(--color-muted);
+  font-family: var(--font-body);
+}
+
+.figure-fl .fl-glyph {
+  font-size: 17px;
+  font-weight: 600;
+  fill: var(--color-accent);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+.figure-fl .fl-packet {
+  fill: var(--color-accent);
+}
+
+.figure-fl .fl-pkt-out-1 { --end-x: 140px; --end-y: 70px;  animation: fl-broadcast 6s ease-in-out infinite; }
+.figure-fl .fl-pkt-out-2 { --end-x: 140px; --end-y: 250px; animation: fl-broadcast 6s ease-in-out infinite; }
+.figure-fl .fl-pkt-out-3 { --end-x: 660px; --end-y: 70px;  animation: fl-broadcast 6s ease-in-out infinite; }
+.figure-fl .fl-pkt-out-4 { --end-x: 660px; --end-y: 250px; animation: fl-broadcast 6s ease-in-out infinite; }
+
+.figure-fl .fl-pkt-in-1  { --start-x: 140px; --start-y: 70px;  animation: fl-upload 6s ease-in-out infinite; }
+.figure-fl .fl-pkt-in-2  { --start-x: 140px; --start-y: 250px; animation: fl-upload 6s ease-in-out infinite; }
+.figure-fl .fl-pkt-in-3  { --start-x: 660px; --start-y: 70px;  animation: fl-upload 6s ease-in-out infinite; }
+.figure-fl .fl-pkt-in-4  { --start-x: 660px; --start-y: 250px; animation: fl-upload 6s ease-in-out infinite; }
+
+@keyframes fl-broadcast {
+  0%             { transform: translate(400px, 160px); opacity: 0; }
+  3%             { opacity: 1; }
+  25%            { transform: translate(var(--end-x), var(--end-y)); opacity: 1; }
+  28%, 100%      { transform: translate(var(--end-x), var(--end-y)); opacity: 0; }
+}
+
+@keyframes fl-upload {
+  0%, 42%        { transform: translate(var(--start-x), var(--start-y)); opacity: 0; }
+  45%            { opacity: 1; }
+  67%            { transform: translate(400px, 160px); opacity: 1; }
+  70%, 100%      { transform: translate(400px, 160px); opacity: 0; }
+}
+
+@keyframes fl-server-pulse {
+  0%, 68%        { transform: scale(1); }
+  73%, 82%       { transform: scale(1.05); }
+  88%, 100%      { transform: scale(1); }
+}
+
+@keyframes fl-client-pulse {
+  0%, 28%        { transform: scale(1); }
+  33%, 41%       { transform: scale(1.06); }
+  46%, 100%      { transform: scale(1); }
+}
+
+/* ----- Riemannian gradient descent figure ----- */
+
+.figure-rgd {
+  color: var(--color-accent);
+}
+
+.figure-rgd .rgd-manifold path {
+  fill: none;
+}
+
+.figure-rgd .rgd-manifold-bg {
+  stroke: var(--color-border);
+  stroke-width: 1.2;
+}
+
+.figure-rgd .rgd-manifold-main {
+  stroke: #4a5568;
+  stroke-width: 2;
+}
+
+.figure-rgd .rgd-iterate {
+  fill: var(--color-accent);
+  offset-path: path('M 60 100 Q 400 390 740 100');
+  offset-distance: 0%;
+  animation: rgd-descent 8s ease-in-out infinite;
+}
+
+@keyframes rgd-descent {
+  0%             { offset-distance: 0%; }
+  85%, 100%      { offset-distance: 50%; }
+}
+
+.figure-rgd .rgd-step {
+  opacity: 0;
+}
+
+.figure-rgd .rgd-tangent {
+  stroke: var(--color-muted);
+  stroke-width: 1.4;
+  stroke-dasharray: 3 3;
+}
+
+.figure-rgd .rgd-grad {
+  stroke: var(--color-accent);
+  stroke-width: 2.2;
+}
+
+.figure-rgd .rgd-step-1 { animation: rgd-step1 8s ease-out infinite; }
+.figure-rgd .rgd-step-2 { animation: rgd-step2 8s ease-out infinite; }
+.figure-rgd .rgd-step-3 { animation: rgd-step3 8s ease-out infinite; }
+
+@keyframes rgd-step1 {
+  0%, 24%        { opacity: 0; }
+  28%, 38%       { opacity: 1; }
+  42%, 100%      { opacity: 0; }
+}
+
+@keyframes rgd-step2 {
+  0%, 44%        { opacity: 0; }
+  48%, 58%       { opacity: 1; }
+  62%, 100%      { opacity: 0; }
+}
+
+@keyframes rgd-step3 {
+  0%, 64%        { opacity: 0; }
+  68%, 78%       { opacity: 1; }
+  82%, 100%      { opacity: 0; }
+}
+
+.figure-rgd .rgd-step-label,
+.figure-rgd .rgd-axis-label {
+  font-size: 12px;
+  fill: var(--color-muted);
+  font-family: var(--font-body);
+  font-style: italic;
+}
+
+/* Reduced-motion fallback: freeze the animations in a representative pose */
+@media (prefers-reduced-motion: reduce) {
+  .figure-fl .fl-packet,
+  .figure-fl .fl-server rect,
+  .figure-fl .fl-client rect,
+  .figure-rgd .rgd-iterate,
+  .figure-rgd .rgd-step {
+    animation: none;
+  }
+  .figure-fl .fl-packet {
+    opacity: 0;
+  }
+  .figure-rgd .rgd-iterate {
+    offset-distance: 30%;
+  }
+  .figure-rgd .rgd-step-1 {
+    opacity: 1;
+  }
+}
+
+/* =========================
    Footer
    ========================= */
 

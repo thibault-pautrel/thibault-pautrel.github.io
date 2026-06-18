@@ -330,7 +330,24 @@
           classical work of Salem and Zygmund, and yields new global universality and
           non-universality results for the zero sets of random trigonometric polynomials.
         </p>
-
+<figure class="theme-figure" aria-labelledby="rtp-fig-caption">
+          <iframe
+            id="rtp-zeros-frame"
+            class="figure-embed"
+            src="random_trig_zeros.html"
+            title="Animated figure: zeros of a random trigonometric polynomial and convergence of the mean count to 2/√3"
+            loading="lazy"
+            style="width:100%; max-width:860px; height:760px; border:0; display:block; margin:0 auto;">
+          </iframe>
+          <figcaption id="rtp-fig-caption">
+            A random trigonometric polynomial
+            f<sub>n</sub>(t) = n<sup>−1/2</sup> &sum;<sub>k=1</sub><sup>n</sup> a<sub>k</sub>&thinsp;cos(kt) + b<sub>k</sub>&thinsp;sin(kt)
+            with independent standard Gaussian coefficients (top), its real zeros on [0,&nbsp;2π] marked in red.
+            As the degree n grows, the mean number of zeros divided by n concentrates on the universal
+            constant 2/√3 ≈ 1.1547 (bottom): each dot is one realization, the solid curve the exact
+            expectation E[𝒩]/n = (2/n)√((n+1)(2n+1)/6).
+          </figcaption>
+        </figure>
         <div class="thesis-links">
           <a href="manuscritPAUTREL.pdf" target="_blank" rel="noopener noreferrer" class="doc-link">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 1h5.586L13 4.414V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.2"/><path d="M9 1v4h4M6 9h4M6 11.5h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
@@ -414,6 +431,13 @@
   <footer class="site-footer">
     <p>&copy; 2026 Thibault Pautrel</p>
   </footer>
-
+<script>
+  window.addEventListener('message', function (e) {
+    if (e.data && e.data.rtpZerosHeight) {
+      var f = document.getElementById('rtp-zeros-frame');
+      if (f) f.style.height = e.data.rtpZerosHeight + 'px';
+    }
+  });
+</script>
 </body>
 </html>

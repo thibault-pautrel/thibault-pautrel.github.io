@@ -716,98 +716,68 @@ main hr {
   text-align: center;
 }
 
-/* ----- Federated learning figure ----- */
+/* ----- Federated learning figure (one communication round) ----- */
 
 .figure-fl {
+  --fl-down: var(--color-accent);
+  --fl-up: #c0392b;
+  --fl-active: #0f9d76;
   color: var(--color-accent);
 }
 
-.figure-fl .fl-lines line {
-  stroke: var(--color-border);
-  stroke-width: 1.5;
-  stroke-dasharray: 5 5;
-}
-
 .figure-fl .fl-server rect {
-  fill: #ffffff;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  transform-origin: 400px 160px;
-  animation: fl-server-pulse 6s ease-in-out infinite;
+  fill: var(--color-accent-soft);
+  stroke: var(--color-accent);
+  stroke-width: 2;
 }
 
-.figure-fl .fl-client rect {
-  fill: #fafbfc;
-  stroke: var(--color-muted);
-  stroke-width: 1.4;
-  animation: fl-client-pulse 6s ease-in-out infinite;
+.figure-fl .fl-node { stroke-width: 2; }
+
+.figure-fl .fl-node--active {
+  fill: #eaf7f2;
+  stroke: var(--fl-active);
 }
 
-.figure-fl .fl-c1 rect { transform-origin: 140px 70px; }
-.figure-fl .fl-c2 rect { transform-origin: 140px 250px; }
-.figure-fl .fl-c3 rect { transform-origin: 660px 70px; }
-.figure-fl .fl-c4 rect { transform-origin: 660px 250px; }
+.figure-fl .fl-node--idle {
+  fill: var(--color-header-bg);
+  stroke: var(--color-border);
+  stroke-dasharray: 6 5;
+}
+
+.figure-fl .fl-arrow {
+  fill: none;
+  stroke-width: 2.2;
+}
+
+.figure-fl .fl-arrow--down { stroke: var(--fl-down); }
+.figure-fl .fl-arrow--up   { stroke: var(--fl-up); }
 
 .figure-fl .fl-label {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
-  fill: #111827;
+  fill: var(--color-text);
   font-family: var(--font-body);
+  text-anchor: middle;
 }
 
 .figure-fl .fl-sublabel {
-  font-size: 11px;
+  font-size: 12px;
   fill: var(--color-muted);
+  font-family: var(--font-body);
+  text-anchor: middle;
+}
+
+.figure-fl .fl-idle .fl-label { fill: var(--color-muted); }
+.figure-fl .fl-idle .fl-sublabel { opacity: 0.7; }
+
+.figure-fl .fl-key {
+  font-size: 13px;
+  font-weight: 600;
   font-family: var(--font-body);
 }
 
-.figure-fl .fl-glyph {
-  font-size: 17px;
-  font-weight: 600;
-  fill: var(--color-accent);
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-}
-
-.figure-fl .fl-packet {
-  fill: var(--color-accent);
-}
-
-.figure-fl .fl-pkt-out-1 { --end-x: 140px; --end-y: 70px;  animation: fl-broadcast 6s ease-in-out infinite; }
-.figure-fl .fl-pkt-out-2 { --end-x: 140px; --end-y: 250px; animation: fl-broadcast 6s ease-in-out infinite; }
-.figure-fl .fl-pkt-out-3 { --end-x: 660px; --end-y: 70px;  animation: fl-broadcast 6s ease-in-out infinite; }
-.figure-fl .fl-pkt-out-4 { --end-x: 660px; --end-y: 250px; animation: fl-broadcast 6s ease-in-out infinite; }
-
-.figure-fl .fl-pkt-in-1  { --start-x: 140px; --start-y: 70px;  animation: fl-upload 6s ease-in-out infinite; }
-.figure-fl .fl-pkt-in-2  { --start-x: 140px; --start-y: 250px; animation: fl-upload 6s ease-in-out infinite; }
-.figure-fl .fl-pkt-in-3  { --start-x: 660px; --start-y: 70px;  animation: fl-upload 6s ease-in-out infinite; }
-.figure-fl .fl-pkt-in-4  { --start-x: 660px; --start-y: 250px; animation: fl-upload 6s ease-in-out infinite; }
-
-@keyframes fl-broadcast {
-  0%             { transform: translate(400px, 160px); opacity: 0; }
-  3%             { opacity: 1; }
-  25%            { transform: translate(var(--end-x), var(--end-y)); opacity: 1; }
-  28%, 100%      { transform: translate(var(--end-x), var(--end-y)); opacity: 0; }
-}
-
-@keyframes fl-upload {
-  0%, 42%        { transform: translate(var(--start-x), var(--start-y)); opacity: 0; }
-  45%            { opacity: 1; }
-  67%            { transform: translate(400px, 160px); opacity: 1; }
-  70%, 100%      { transform: translate(400px, 160px); opacity: 0; }
-}
-
-@keyframes fl-server-pulse {
-  0%, 68%        { transform: scale(1); }
-  73%, 82%       { transform: scale(1.05); }
-  88%, 100%      { transform: scale(1); }
-}
-
-@keyframes fl-client-pulse {
-  0%, 28%        { transform: scale(1); }
-  33%, 41%       { transform: scale(1.06); }
-  46%, 100%      { transform: scale(1); }
-}
-
+.figure-fl .fl-key--down { fill: var(--fl-down); }
+.figure-fl .fl-key--up   { fill: var(--fl-up); }
 /* ----- Riemannian gradient descent figure ----- */
 
 .figure-rgd {
@@ -887,15 +857,9 @@ main hr {
 
 /* Reduced-motion fallback: freeze the animations in a representative pose */
 @media (prefers-reduced-motion: reduce) {
-  .figure-fl .fl-packet,
-  .figure-fl .fl-server rect,
-  .figure-fl .fl-client rect,
-  .figure-rgd .rgd-iterate,
+    .figure-rgd .rgd-iterate,
   .figure-rgd .rgd-step {
     animation: none;
-  }
-  .figure-fl .fl-packet {
-    opacity: 0;
   }
   .figure-rgd .rgd-iterate {
     offset-distance: 30%;

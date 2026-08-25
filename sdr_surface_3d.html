@@ -1,21 +1,26 @@
 <!doctype html>
 <meta charset="utf-8" />
 <!--
-  Animated 3D version of the SDR "local surrogate" figure.
-    - vertical axis  : g(x) = E[Y | X = x]            (the response surface)
-    - floor plane     : the 2D predictor space, points X_i (black)
+  Animated 3D version of the SDR "single-index surface" figure.
+    - vertical axis   : g(B'x) = E[Y | X = x]        (the response surface)
+    - floor plane     : the predictor space, points X_i (black)
     - green line      : span(B), the 1-D sufficient subspace
     - green dots      : orthogonal projections of X_i onto span(B)
-    - red dots        : responses Y_i = g(.) lifted onto the surface
+    - red dots        : responses Y_i lifted onto the surface
+    - green arrows    : grad g(x), always parallel to span(B)
+    - pale contours   : level sets of g, orthogonal to span(B)
+  The surface is a RIDGE: it varies only along span(B) and is flat in every
+  orthogonal direction. That is the geometric content of the single-index
+  model, and it is what makes the contours straight and the gradients aligned.
+
   Self-contained: only depends on three.js core from a CDN. Drag to rotate,
-  scroll to zoom. Embed by hosting this file and <iframe>-ing it, or paste
-  the markup straight into a page.
+  scroll to zoom.
 -->
 <style>
   :root {
-    --green:  #1f7a1f;   /* span(B)          */
-    --red:    #b21e1e;   /* Y_i / responses  */
-    --blue:   #1f5fae;   /* surface mesh     */
+    --green:  #1f7a1f;   /* span(B), gradients */
+    --red:    #b21e1e;   /* Y_i / responses    */
+    --blue:   #1f5fae;   /* surface mesh       */
     --ink:    #333;
   }
   #sdr-wrap {
@@ -53,16 +58,26 @@
   }
   #sdr-legend .sw { display:inline-block; width:10px; height:10px; border-radius:50%;
                     margin-right:6px; vertical-align:middle; }
+  #sdr-legend .bar { display:inline-block; width:10px; height:3px; border-radius:2px;
+                     margin-right:6px; vertical-align:middle; }
+  #sdr-caption {
+    position: absolute; left: 12px; top: 12px;
+    font-size: 12.5px; color: var(--ink);
+    background: rgba(255,255,255,.7); padding: 6px 9px; border-radius: 8px;
+    backdrop-filter: blur(2px); max-width: 46%;
+  }
 </style>
 
 <div id="sdr-wrap">
+  <div id="sdr-caption">g varies only along span(B)</div>
   <div id="sdr-legend">
     <div><span class="sw" style="background:var(--green)"></span>span(B)</div>
     <div><span class="sw" style="background:#111"></span>X<sub>i</sub> (predictors)</div>
-    <div><span class="sw" style="background:var(--red)"></span>Y<sub>i</sub> = g(B<sup>⊤</sup>X)</div>
+    <div><span class="sw" style="background:var(--red)"></span>Y<sub>i</sub> = g(B<sup>⊤</sup>X<sub>i</sub>)</div>
+    <div><span class="bar" style="background:var(--green)"></span>∇g(x) ∈ span(B)</div>
   </div>
   <div id="sdr-ui">
-    <button id="sdr-replay" title="Replay the projection animation">↻ Replay</button>
+    <button id="sdr-replay" title="Replay the animation">↻ Replay</button>
     <button id="sdr-spin" aria-pressed="true" title="Toggle auto-rotation">⟳ Auto-rotate</button>
   </div>
 </div>
@@ -75,28 +90,53 @@
 import * as THREE from "three";
 
 /* ----------------------------------------------------------------------
-   Model: the response surface and the data, taken from the TikZ source.
+   Model: a single-index ridge surface, taken from the TikZ source.
+     t(x,y) = B'(x - c)          index (scalar)
+     g(t)   = 0.25 + 1.15 * sigmoid(1.9 t)
+   The surface depends on (x,y) ONLY through t, so it is constant along
+   the direction orthogonal to B.
 ---------------------------------------------------------------------- */
-const G = (x, y) => 1.6 * Math.exp(-(((x - 2) ** 2) / 1.8 + ((y - 1.4) ** 2) / 1.1));
+const vx = 0.8, vy = 0.6;              // span(B): unit direction
+const wx = -0.6, wy = 0.8;             // orthogonal direction (flat direction)
+const bcx = 2.0, bcy = 1.4;            // anchor of span(B)
 
-// span(B): unit direction (vx,vy) anchored at (bcx,bcy)
-const vx = 0.8, vy = 0.6, bcx = 2.0, bcy = 1.4;
+const idx  = (x, y) => (x - bcx) * vx + (y - bcy) * vy;
+const gOft = t => 0.25 + 1.15 / (1 + Math.exp(-1.9 * t));
+const gpOft = t => { const p = 1 / (1 + Math.exp(-1.9 * t)); return 1.15 * 1.9 * p * (1 - p); };
+const G = (x, y) => gOft(idx(x, y));
 
-// predictor cloud X_i (floor coordinates), from \cloud
+// predictor cloud X_i (floor coordinates)
 const CLOUD = [
   [0.6,0.7],[1.0,1.9],[1.5,0.5],[1.8,2.3],[2.2,1.0],
   [2.5,2.4],[2.9,0.8],[3.2,1.9],[0.9,2.5],[3.5,1.3],
 ];
 
-// domain: x in [0,4], y in [0,3]; centre it so rotation looks balanced.
+// where the gradient arrows are drawn
+const GRADPTS = [[0.6,0.7],[1.0,1.9],[2.0,0.6],[2.1,2.2],[2.9,0.8],[3.2,1.9]];
+
+// domain x in [0,4], y in [0,3]; centre it so rotation looks balanced.
+const XLO = 0, XHI = 4, YLO = 0, YHI = 3;
 const CX = 2.0, CY = 1.5;
-// world mapping: worldX = x - CX, worldY = g (up), worldZ = y - CY
 const P = (x, y, g = 0) => new THREE.Vector3(x - CX, g, y - CY);
 
-// orthogonal projection of (px,py) onto span(B)
 function projectOntoB(px, py) {
-  const t = (px - bcx) * vx + (py - bcy) * vy;
+  const t = idx(px, py);
   return [bcx + t * vx, bcy + t * vy];
+}
+
+// clip the line p0 + s*d to the floor rectangle; returns [sMin,sMax] or null
+function clipToBox(px, py, dx, dy) {
+  let sMin = -1e9, sMax = 1e9;
+  const slab = (p, d, lo, hi) => {
+    if (Math.abs(d) < 1e-9) return (p >= lo && p <= hi);
+    let t1 = (lo - p) / d, t2 = (hi - p) / d;
+    if (t1 > t2) { const tmp = t1; t1 = t2; t2 = tmp; }
+    sMin = Math.max(sMin, t1); sMax = Math.min(sMax, t2);
+    return true;
+  };
+  if (!slab(px, dx, XLO, XHI)) return null;
+  if (!slab(py, dy, YLO, YHI)) return null;
+  return sMin < sMax ? [sMin, sMax] : null;
 }
 
 /* ----------------------------------------------------------------------
@@ -115,21 +155,20 @@ const key = new THREE.DirectionalLight(0xffffff, 0.6);
 key.position.set(4, 8, 6);
 scene.add(key);
 
-const root = new THREE.Group();          // everything rotatable
+const root = new THREE.Group();
 scene.add(root);
 
 /* ----------------------------------------------------------------------
    Floor plane (predictor space at g = 0)
 ---------------------------------------------------------------------- */
 {
-  const w = 4, d = 3;
+  const w = XHI - XLO, d = YHI - YLO;
   const floor = new THREE.Mesh(
     new THREE.PlaneGeometry(w, d),
     new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.05,
                                   side: THREE.DoubleSide, depthWrite: false })
   );
   floor.rotation.x = -Math.PI / 2;
-  floor.position.set(0, 0, 0);
   root.add(floor);
 
   const border = new THREE.LineSegments(
@@ -141,42 +180,51 @@ scene.add(root);
 }
 
 /* ----------------------------------------------------------------------
-   Response surface g(x,y): translucent skin + blue wireframe gridlines
+   Response surface: translucent skin + two families of lines.
+     - profiles  : along B, they carry the sigmoid shape
+     - contours  : orthogonal to B, dead straight and level (the ridge)
 ---------------------------------------------------------------------- */
 {
-  const NX = 48, NY = 36;
-  const surfGeo = new THREE.PlaneGeometry(4, 3, NX, NY);
+  const NX = 56, NY = 42;
+  const surfGeo = new THREE.PlaneGeometry(XHI - XLO, YHI - YLO, NX, NY);
   const pos = surfGeo.attributes.position;
   for (let i = 0; i < pos.count; i++) {
-    const ox = pos.getX(i), oy = pos.getY(i);   // plane coords == world x,z here
-    const g = G(ox + CX, oy + CY);              // data coords -> height
-    pos.setXYZ(i, ox, g, oy);                   // (worldX, worldY=up, worldZ)
+    const ox = pos.getX(i), oy = pos.getY(i);
+    pos.setXYZ(i, ox, G(ox + CX, oy + CY), oy);
   }
   pos.needsUpdate = true;
   surfGeo.computeVertexNormals();
-  const skin = new THREE.Mesh(
-    surfGeo,
-    new THREE.MeshStandardMaterial({
-      color: 0x9cc2f0, transparent: true, opacity: 0.28,
-      side: THREE.DoubleSide, roughness: 0.9, metalness: 0,
-      depthWrite: false,
-    })
-  );
-  root.add(skin);
+  root.add(new THREE.Mesh(surfGeo, new THREE.MeshStandardMaterial({
+    color: 0x9cc2f0, transparent: true, opacity: 0.30,
+    side: THREE.DoubleSide, roughness: 0.9, metalness: 0, depthWrite: false,
+  })));
 
-  // gridlines, like the TikZ mesh
-  const lineMat  = new THREE.LineBasicMaterial({ color: 0x1f5fae, transparent: true, opacity: 0.75 });
-  const lineMat2 = new THREE.LineBasicMaterial({ color: 0x4f7fc0, transparent: true, opacity: 0.40 });
+  const profMat = new THREE.LineBasicMaterial({ color: 0x1f5fae, transparent: true, opacity: 0.75 });
+  const contMat = new THREE.LineBasicMaterial({ color: 0x4f7fc0, transparent: true, opacity: 0.42 });
 
-  for (let yk = 0; yk <= 3.0001; yk += 0.5) {     // curves along x
+  // profiles: lines along B, offset by s along w
+  for (let s = -2.0; s <= 2.001; s += 0.4) {
+    const px = bcx + s * wx, py = bcy + s * wy;
+    const seg = clipToBox(px, py, vx, vy);
+    if (!seg) continue;
     const pts = [];
-    for (let s = 0; s <= 40; s++) { const x = 4 * s / 40; pts.push(P(x, yk, G(x, yk))); }
-    root.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), lineMat));
+    for (let k = 0; k <= 48; k++) {
+      const u = seg[0] + (seg[1] - seg[0]) * k / 48;
+      const x = px + u * vx, y = py + u * vy;
+      pts.push(P(x, y, G(x, y)));
+    }
+    root.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), profMat));
   }
-  for (let xk = 0; xk <= 4.0001; xk += 0.5) {     // curves along y
-    const pts = [];
-    for (let s = 0; s <= 30; s++) { const y = 3 * s / 30; pts.push(P(xk, y, G(xk, y))); }
-    root.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), lineMat2));
+
+  // contours: lines orthogonal to B -> constant height
+  for (let t = -2.4; t <= 2.601; t += 0.4) {
+    const px = bcx + t * vx, py = bcy + t * vy;
+    const seg = clipToBox(px, py, wx, wy);
+    if (!seg) continue;
+    const h = gOft(t);
+    const a = P(px + seg[0] * wx, py + seg[0] * wy, h);
+    const b = P(px + seg[1] * wx, py + seg[1] * wy, h);
+    root.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([a, b]), contMat));
   }
 }
 
@@ -205,18 +253,13 @@ function cone(at, dir, color, r = 0.07, h = 0.18) {
 }
 
 /* ----------------------------------------------------------------------
-   g-axis (vertical), at the floor corner
+   g-axis (vertical) and span(B) (green, in the floor plane)
 ---------------------------------------------------------------------- */
 {
   const grey = 0x808080;
-  const a = P(0, 0, 0), top = P(0, 0, 2.35);
-  root.add(tube(a, top, grey, 0.012));
-  root.add(cone(P(0, 0, 2.45), new THREE.Vector3(0, 1, 0), grey, 0.06, 0.18));
+  root.add(tube(P(0, 0, 0), P(0, 0, 1.85), grey, 0.012));
+  root.add(cone(P(0, 0, 1.95), new THREE.Vector3(0, 1, 0), grey, 0.06, 0.18));
 }
-
-/* ----------------------------------------------------------------------
-   span(B): green double-headed arrow in the floor plane
----------------------------------------------------------------------- */
 {
   const green = 0x1f7a1f;
   const e1 = P(bcx - 2.3 * vx, bcy - 2.3 * vy, 0);
@@ -228,32 +271,57 @@ function cone(at, dir, color, r = 0.07, h = 0.18) {
 }
 
 /* ----------------------------------------------------------------------
-   Per-point dynamic geometry (animated)
+   Per-point dynamic geometry
 ---------------------------------------------------------------------- */
 const sphereGeo = new THREE.SphereGeometry(1, 18, 14);
 const matBlack = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.6 });
 const matGreen = new THREE.MeshStandardMaterial({ color: 0x1f7a1f, roughness: 0.5 });
 const matRed   = new THREE.MeshStandardMaterial({ color: 0xb21e1e, roughness: 0.5 });
 
-const dotProjMat = new THREE.LineDashedMaterial({ color: 0x9a9a9a, dashSize: 0.07, gapSize: 0.05 });
-const liftMat    = new THREE.LineBasicMaterial({ color: 0x9a9a9a, transparent: true, opacity: 0.7 });
+const dashMat = new THREE.LineDashedMaterial({ color: 0x9a9a9a, dashSize: 0.07, gapSize: 0.05 });
+const liftMat = new THREE.LineBasicMaterial({ color: 0x9a9a9a, transparent: true, opacity: 0.7 });
 
 const items = CLOUD.map(([px, py]) => {
   const [qx, qy] = projectOntoB(px, py);
   const Xpos = P(px, py, 0);
   const Qpos = P(qx, qy, 0);
-  const Spos = P(qx, qy, G(qx, qy));   // response lifted to surface
+  const Spos = P(px, py, G(px, py));   // lift is vertical: same height as above Q
 
   const xDot = new THREE.Mesh(sphereGeo, matBlack); xDot.scale.setScalar(0.05); xDot.position.copy(Xpos);
   const gDot = new THREE.Mesh(sphereGeo, matGreen); gDot.scale.setScalar(0.0001);
   const rDot = new THREE.Mesh(sphereGeo, matRed);   rDot.scale.setScalar(0.0001);
   root.add(xDot, gDot, rDot);
 
-  const projLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints([Xpos, Xpos]), dotProjMat);
-  const liftLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints([Qpos, Qpos]), liftMat);
+  const projLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints([Xpos, Xpos]), dashMat);
+  const liftLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints([Xpos, Xpos]), liftMat);
   root.add(projLine, liftLine);
 
   return { Xpos, Qpos, Spos, gDot, rDot, projLine, liftLine };
+});
+
+/* ----------------------------------------------------------------------
+   Gradient arrows on the floor: direction always B, length |g'(t)|
+---------------------------------------------------------------------- */
+const UP = new THREE.Vector3(0, 1, 0);
+const bDir = new THREE.Vector3(vx, 0, vy).normalize();
+const grads = GRADPTS.map(([px, py]) => {
+  const L = 0.9 * gpOft(idx(px, py)) + 0.12;
+  const base = P(px, py, 0.012);
+
+  const shaft = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.021, 0.021, 1, 12),
+    new THREE.MeshStandardMaterial({ color: 0x2e8b2e, roughness: 0.6 })
+  );
+  shaft.geometry.translate(0, 0.5, 0);          // grow from the base, not the centre
+  shaft.quaternion.setFromUnitVectors(UP, bDir);
+  shaft.position.copy(base);
+  shaft.scale.y = 0.0001;
+
+  const head = cone(base, bDir, 0x2e8b2e, 0.062, 0.15);
+  head.visible = false;
+
+  root.add(shaft, head);
+  return { base, L, shaft, head };
 });
 
 /* ----------------------------------------------------------------------
@@ -262,7 +330,7 @@ const items = CLOUD.map(([px, py]) => {
 function label(text, color, pos, scale = 0.6) {
   const c = document.createElement("canvas"); c.width = 256; c.height = 128;
   const ctx = c.getContext("2d");
-  ctx.font = "bold 64px system-ui, sans-serif";
+  ctx.font = "bold 60px system-ui, sans-serif";
   ctx.fillStyle = color; ctx.textAlign = "center"; ctx.textBaseline = "middle";
   ctx.fillText(text, 128, 64);
   const tex = new THREE.CanvasTexture(c); tex.anisotropy = 4;
@@ -270,22 +338,25 @@ function label(text, color, pos, scale = 0.6) {
   sp.position.copy(pos); sp.scale.set(scale * 2, scale, 1);
   root.add(sp); return sp;
 }
-label("g", "#666", P(0, 0, 2.65), 0.4);
-label("span(B)", "#1f7a1f", P(bcx + 2.0 * vx, bcy + 2.0 * vy, 0.0).add(new THREE.Vector3(0.35, 0.18, 0.2)), 0.42);
-label("Xᵢ", "#111", items[6].Xpos.clone().add(new THREE.Vector3(0.18, 0.12, 0.0)), 0.36);
-label("Yᵢ", "#b21e1e", items[5].Spos.clone().add(new THREE.Vector3(0.18, 0.18, 0.0)), 0.36);
+label("g", "#666", P(0, 0, 2.15), 0.4);
+label("span(B)", "#1f7a1f",
+      P(bcx + 2.0 * vx, bcy + 2.0 * vy, 0).add(new THREE.Vector3(0.30, 0.16, 0.20)), 0.42);
+label("Xᵢ", "#111", items[6].Xpos.clone().add(new THREE.Vector3(0.16, 0.12, 0.0)), 0.36);
+label("Yᵢ", "#b21e1e", items[5].Spos.clone().add(new THREE.Vector3(0.16, 0.18, 0.0)), 0.36);
 
 /* ----------------------------------------------------------------------
    Animation timeline
 ---------------------------------------------------------------------- */
 const N = items.length;
-const PROJ_START = 0.6, STAGGER = 0.16, PROJ_DUR = 1.1;
-const lastProjEnd = PROJ_START + (N - 1) * STAGGER + PROJ_DUR;
-const LIFT_START = lastProjEnd + 0.25, LIFT_DUR = 0.9;
-const lastLiftEnd = LIFT_START + (N - 1) * STAGGER + LIFT_DUR;
-const LOOP_END = lastLiftEnd + 2.4;
+const PROJ_START = 0.6, STAGGER = 0.14, PROJ_DUR = 1.0;
+const projEnd  = PROJ_START + (N - 1) * STAGGER + PROJ_DUR;
+const LIFT_START = projEnd + 0.25, LIFT_DUR = 0.85;
+const liftEnd  = LIFT_START + (N - 1) * STAGGER + LIFT_DUR;
+const GRAD_START = liftEnd + 0.35, GRAD_STAG = 0.12, GRAD_DUR = 0.7;
+const gradEnd  = GRAD_START + (grads.length - 1) * GRAD_STAG + GRAD_DUR;
+const LOOP_END = gradEnd + 2.6;
 
-const easeIO = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const easeIO  = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 const easeOut = t => 1 - Math.pow(1 - t, 3);
 const clamp01 = t => Math.max(0, Math.min(1, t));
 const lerpV = (a, b, t) => a.clone().lerp(b, t);
@@ -297,7 +368,6 @@ function applyAnim() {
     const pp = easeIO(clamp01((tAnim - (PROJ_START + i * STAGGER)) / PROJ_DUR));
     const pl = easeIO(clamp01((tAnim - (LIFT_START + i * STAGGER)) / LIFT_DUR));
 
-    // projection: green dot slides X -> Q along the floor
     const gPos = lerpV(it.Xpos, it.Qpos, pp);
     it.gDot.position.copy(gPos);
     it.gDot.scale.setScalar(pp > 0 ? 0.055 * easeOut(clamp01(pp / 0.25)) : 0.0001);
@@ -305,18 +375,26 @@ function applyAnim() {
     it.projLine.computeLineDistances();
     it.projLine.visible = pp > 0;
 
-    // lift: red dot rises Q -> surface
-    const rPos = lerpV(it.Qpos, it.Spos, pl);
+    const rPos = lerpV(it.Xpos, it.Spos, pl);
     it.rDot.position.copy(rPos);
     it.rDot.scale.setScalar(pl > 0 ? 0.062 * easeOut(clamp01(pl / 0.25)) : 0.0001);
-    it.liftLine.geometry.setFromPoints([it.Qpos, rPos]);
+    it.liftLine.geometry.setFromPoints([it.Xpos, rPos]);
     it.liftLine.visible = pl > 0;
+  }
+
+  for (let k = 0; k < grads.length; k++) {
+    const gr = grads[k];
+    const a = easeOut(clamp01((tAnim - (GRAD_START + k * GRAD_STAG)) / GRAD_DUR));
+    const len = gr.L * a;
+    gr.shaft.scale.y = Math.max(0.0001, len);
+    gr.head.visible = a > 0.05;
+    gr.head.position.copy(gr.base).addScaledVector(bDir, len + 0.075);
   }
 }
 function resetAnim() { tAnim = 0; }
 
 /* ----------------------------------------------------------------------
-   Simple orbit controls + auto-rotate
+   Orbit controls + auto-rotate
 ---------------------------------------------------------------------- */
 const target = new THREE.Vector3(0, 0.45, 0);
 let radius = 7.2, theta = 0.85, phi = 0.98, autoSpin = true, dragging = false, lx = 0, ly = 0;

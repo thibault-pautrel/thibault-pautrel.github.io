@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Federated training of SPDNet on covariance representations of EEG signals, with Riemannian aggregation and privacy guarantees.">
+  <title>Geometry-aware federated learning – Thibault Pautrel</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <aside class="site-sidebar">
+    <img class="sidebar-photo" src="photoTP.png" alt="">
+    <h1 class="site-title"><a href="index.html">Thibault Pautrel</a></h1>
+    <p class="sidebar-role">Postdoctoral researcher<br>L2S — CentraleSupélec,<br>Université Paris-Saclay</p>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li>
+          <a href="research.html" class="is-section">Research</a>
+          <ul class="section-index">
+            <li><a href="research-federated.html" aria-current="page">Geometry-aware federated learning</a></li>
+            <li><a href="research-riemannian.html">Riemannian stochastic optimization</a></li>
+            <li><a href="research-random.html">Zeros of random trigonometric functions</a></li>
+          </ul>
+        </li>
+        <li><a href="teaching.html">Teaching</a></li>
+        <li><a href="CVenglish.pdf" target="_blank" rel="noopener noreferrer">CV (PDF)</a></li>
+      </ul>
+    </nav>
+
+    <p class="sidebar-contact">
+      HAL · arXiv<br>
+      GitHub<br>
+      firstname.lastname@centralesupelec.fr
+    </p>
+  </aside>
+
+  <main id="main-content" class="container">
+    <h2 class="page-title">Geometry-aware federated learning</h2>
+
+    <section id="fedlearning" class="theme-section">
+      <div class="theme-card theme-card--current">
+        <div class="theme-eyebrow">
+          <span class="theme-modifier">Current</span>
+        </div>
+        <p>
+          My current work addresses geometry-aware federated learning for motor-imagery
+          EEG classification. I study federated training of
+          <a href="https://ojs.aaai.org/index.php/AAAI/article/view/10866" target="_blank" rel="noopener noreferrer">SPDNet</a>
+          on covariance-based representations of EEG signals and compare it with Euclidean
+          baselines such as EEGNet, with a particular emphasis on Riemannian aggregation
+          schemes that preserve the Stiefel/SPD manifold geometry. A central question is
+          how to combine aggregation, partial client participation, and privacy guarantees
+          while remaining compatible with the underlying manifold structure.
+        </p>
+
+        <figure class="theme-figure" aria-labelledby="fl-fig-caption">
+                     <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" class="figure-svg figure-fl" role="img" aria-label="One federated round: the server broadcasts the global model to the sampled clients, which return locally updated models">
+            <defs>
+              <marker id="fl-head-down" viewBox="0 0 10 10" refX="8.5" refY="5"
+                      markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0 1.2 L9 5 L0 8.8 z" fill="#1d5fa8"/>
+              </marker>
+              <marker id="fl-head-up" viewBox="0 0 10 10" refX="8.5" refY="5"
+                      markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0 1.2 L9 5 L0 8.8 z" fill="#c0392b"/>
+              </marker>
+            </defs>
+
+            <!-- broadcast: server -> sampled clients -->
+            <g class="fl-arrow fl-arrow--down" marker-end="url(#fl-head-down)">
+              <path d="M400 167 Q384 135 400 103"/>
+              <path d="M333.5 227.6 Q284.2 261.2 224.6 264.6"/>
+              <path d="M466.5 227.6 Q526.1 230.9 575.4 264.6"/>
+            </g>
+
+            <!-- return: sampled clients -> server -->
+            <g class="fl-arrow fl-arrow--up" marker-end="url(#fl-head-up)">
+              <path d="M400 103 Q416 135 400 167"/>
+              <path d="M224.6 264.6 Q273.9 230.9 333.5 227.6"/>
+              <path d="M575.4 264.6 Q515.8 261.2 466.5 227.6"/>
+            </g>
+
+            <text class="fl-key fl-key--down" x="372" y="140" text-anchor="end">&#952;<tspan dy="4" font-size="10">t</tspan></text>
+            <text class="fl-key fl-key--up" x="428" y="140" text-anchor="start">&#952;<tspan dy="4" font-size="10">t</tspan><tspan dy="-12" font-size="10">(1)</tspan></text>
+            <text class="fl-key fl-key--up" x="276" y="226" text-anchor="middle">&#952;<tspan dy="4" font-size="10">t</tspan><tspan dy="-12" font-size="10">(2)</tspan></text>
+            <text class="fl-key fl-key--up" x="524" y="226" text-anchor="middle">&#952;<tspan dy="4" font-size="10">t</tspan><tspan dy="-12" font-size="10">(3)</tspan></text>
+
+            <!-- server -->
+            <g class="fl-server" transform="translate(400 205)">
+              <rect x="-58" y="-29" width="116" height="58" rx="7"/>
+              <text class="fl-label" y="-3">Server</text>
+              <text class="fl-sublabel" y="17">&#952;<tspan dy="3" font-size="10">t</tspan><tspan dy="-3"> &#8594; </tspan>&#952;<tspan dy="3" font-size="10">t+1</tspan></text>
+            </g>
+
+            <!-- clients sampled this round -->
+            <g transform="translate(400 55)">
+              <circle class="fl-node fl-node--active" r="44"/>
+              <text class="fl-label" y="-3">Cl. 1</text>
+              <text class="fl-sublabel" y="17" font-style="italic">D<tspan dy="-5" font-size="10">(1)</tspan></text>
+            </g>
+            <g transform="translate(179.2 280)">
+              <circle class="fl-node fl-node--active" r="44"/>
+              <text class="fl-label" y="-3">Cl. 2</text>
+              <text class="fl-sublabel" y="17" font-style="italic">D<tspan dy="-5" font-size="10">(2)</tspan></text>
+            </g>
+            <g transform="translate(620.8 280)">
+              <circle class="fl-node fl-node--active" r="44"/>
+              <text class="fl-label" y="-3">Cl. 3</text>
+              <text class="fl-sublabel" y="17" font-style="italic">D<tspan dy="-5" font-size="10">(3)</tspan></text>
+            </g>
+
+            <!-- clients not sampled this round -->
+            <g class="fl-idle" transform="translate(179.2 130)">
+              <circle class="fl-node fl-node--idle" r="44"/>
+              <text class="fl-label" y="-3">Cl. 4</text>
+              <text class="fl-sublabel" y="17" font-style="italic">D<tspan dy="-5" font-size="10">(4)</tspan></text>
+            </g>
+            <g class="fl-idle" transform="translate(620.8 130)">
+              <circle class="fl-node fl-node--idle" r="44"/>
+              <text class="fl-label" y="-3">Cl. 5</text>
+              <text class="fl-sublabel" y="17" font-style="italic">D<tspan dy="-5" font-size="10">(5)</tspan></text>
+            </g>
+          </svg>
+                       <figcaption id="fl-fig-caption">
+            One communication round: the server broadcasts the global model &#952;<sub>t</sub> to a
+            sampled subset of clients (dashed clients sit this round out), each updates it locally on
+            private data, and the returning iterates are aggregated into &#952;<sub>t+1</sub>.
+          </figcaption>
+        </figure>
+
+        <div class="meta-grid">
+          <div class="meta-item">
+            <span class="meta-label">Institution</span>
+            L2S, CentraleSupélec (Gif-sur-Yvette), since October 2025
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Supervision</span>
+            Florent Bouchard, with Guillaume Ginolhac and Ammar Mian
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Keywords</span>
+            <span class="keywords">
+              <span class="kw">federated learning</span>
+              <span class="kw">Riemannian manifolds</span>
+              <span class="kw">SPD matrices</span>
+              <span class="kw">deep learning</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <h4 class="theme-subheading">Publications</h4>
+      <ol class="pub-list">
+      
+        <li class="pub-item">
+          <span class="pub-tag pub-status--accepted">Accepted</span>
+          <span class="pub-authors">T. Pautrel, F. Bouchard, G. Ginolhac, A. Mian</span>
+          <span class="pub-title">FedSPDNet: Geometry-Aware Federated Deep Learning with SPDNet</span>
+          <span class="pub-venue"><a href="https://eusipco2026.org" target="_blank" rel="noopener noreferrer">EUSIPCO 2026</a></span>
+          <div class="pub-actions">
+            <a href="draft_eusipco26_templateIEEEconfpaper-2.pdf" target="_blank" rel="noopener noreferrer" class="doc-link">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 1h5.586L13 4.414V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M9 1v4h4M6 9h4M6 11.5h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+                            Preprint (PDF)
+            </a>
+            <a href="poster_fedspdet_eusipco.pdf" target="_blank" rel="noopener noreferrer" class="doc-link">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M2 2h12v10H2z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+                <path d="M4.5 4.5h4M4.5 6.5h7M4.5 8.5h5M11 4.5h.5v3H11z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Poster (PDF)
+            </a>
+          </div>
+        </li>
+      </ol>
+
+      <h4 class="theme-subheading">Talks</h4>
+      <ol class="pub-list">
+        <li class="pub-item">
+          <span class="pub-title">Federated Learning on Riemannian Manifolds: a Projection-based Approach</span>
+          <span class="pub-venue">
+            <a href="https://sites.google.com/view/7thslsipworkshop/home" target="_blank" rel="noopener noreferrer">7th Statistical Learning for Signal and Image Processing (SLSIP) Workshop</a>,
+            Kruje, Albania
+          </span>
+          <div class="pub-actions">
+            <a href="slsip26_beamer.pdf" target="_blank" rel="noopener noreferrer" class="doc-link">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M2 3h12v8H2z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+                <path d="M5 14h6M8 11v3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+              Slides (PDF)
+            </a>
+          </div>
+        </li>
+      </ol>
+
+      <h4 class="theme-subheading">Earlier work on this theme</h4>
+      <div class="research-card">
+        <div class="section-label">Internship · 2023</div>
+        <h4>Riemannian federated learning for time-series analysis with remote sensing data</h4>
+        <p>
+          During an internship at LISTIC, I worked on an early version of FedSPDNet: a
+          geometry-aware federated learning framework targeting the distributed and
+          sovereignty-constrained setting of remote-sensing data. Rather than relying on
+          large convolutional architectures, FedSPDNet operates on Symmetric Positive
+          Definite matrices through second-order statistics, and uses specialized Riemannian
+          aggregation schemes (Stiefel projected means, tangent-space averaging) to preserve
+          the geometric structure of model parameters while reducing communication costs.
+        </p>
+        <div class="meta-grid">
+          <div class="meta-item">
+            <span class="meta-label">Institution</span>
+            LISTIC laboratory, University Savoie Mont Blanc (Annecy)
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Supervisors</span>
+            Guillaume Ginolhac, Ammar Mian, Florent Bouchard
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Thibault Pautrel</p>
+  </footer>
+</body>
+</html>

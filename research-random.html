@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Universality of the expected number of real zeros of random trigonometric polynomials under dependent and non-Gaussian coefficients.">
+  <title>Zeros of random trigonometric functions – Thibault Pautrel</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <aside class="site-sidebar">
+    <img class="sidebar-photo" src="photoTP.png" alt="">
+    <h1 class="site-title"><a href="index.html">Thibault Pautrel</a></h1>
+    <p class="sidebar-role">Postdoctoral researcher<br>L2S — CentraleSupélec,<br>Université Paris-Saclay</p>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li>
+          <a href="research.html" class="is-section">Research</a>
+          <ul class="section-index">
+            <li><a href="research-federated.html">Geometry-aware federated learning</a></li>
+            <li><a href="research-riemannian.html">Riemannian stochastic optimization</a></li>
+            <li><a href="research-random.html" aria-current="page">Zeros of random trigonometric functions</a></li>
+          </ul>
+        </li>
+        <li><a href="teaching.html">Teaching</a></li>
+        <li><a href="CVenglish.pdf" target="_blank" rel="noopener noreferrer">CV (PDF)</a></li>
+      </ul>
+    </nav>
+
+    <p class="sidebar-contact">
+      HAL · arXiv<br>
+      GitHub<br>
+      firstname.lastname@centralesupelec.fr
+    </p>
+  </aside>
+
+  <main id="main-content" class="container">
+    <h2 class="page-title">Zeros of random trigonometric functions</h2>
+
+    <section id="random-trig" class="theme-section">
+      <div class="theme-card">
+        <div class="theme-eyebrow">
+          <span class="theme-modifier">2019–2022</span>
+        </div>
+        <p>
+          My PhD thesis studied the asymptotic behavior of the number of zeros of random
+          trigonometric functions on a fixed interval — almost surely, in distribution, and
+          on average — with a particular focus on universality: to what extent this behavior
+          depends on the law of the coefficients, their correlations, or the choice of basis
+          functions. Working with dependent stationary Gaussian processes, dependence is
+          encoded through the associated spectral measure, whose nature has a decisive
+          impact on the asymptotics and produces both universal and genuinely non-universal
+          regimes. The analysis combines the Kac–Rice formula with techniques inspired by
+          classical work of Salem and Zygmund, and yields new global universality and
+          non-universality results for the zero sets of random trigonometric polynomials.
+        </p>
+<figure class="theme-figure" aria-labelledby="rtp-fig-caption">
+          <iframe
+            id="rtp-zeros-frame"
+            class="figure-embed"
+            src="random_trig_zeros.html"
+            title="Animated figure: zeros of a random trigonometric polynomial and convergence of the mean count to 2/√3"
+            loading="lazy"
+            style="width:100%; max-width:860px; height:760px; border:0; display:block; margin:0 auto;">
+          </iframe>
+          <figcaption id="rtp-fig-caption">
+            A random trigonometric polynomial
+            f<sub>n</sub>(t) = n<sup>−1/2</sup> &sum;<sub>k=1</sub><sup>n</sup> a<sub>k</sub>&thinsp;cos(kt) + b<sub>k</sub>&thinsp;sin(kt)
+            with independent standard Gaussian coefficients (top), its real zeros on [0,&nbsp;2π] marked in red.
+            As the degree n grows, the mean number of zeros divided by n concentrates on the universal
+            constant 2/√3 ≈ 1.1547 (bottom): each dot is one realization, the solid curve the exact
+            expectation E[𝒩]/n = (2/n)√((n+1)(2n+1)/6).
+          </figcaption>
+        </figure>
+        <div class="thesis-links">
+          <a href="manuscritPAUTREL.pdf" target="_blank" rel="noopener noreferrer" class="doc-link">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 1h5.586L13 4.414V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.2"/><path d="M9 1v4h4M6 9h4M6 11.5h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Manuscript (PDF)
+          </a>
+          <a href="https://theses.fr/2022REN1S015" target="_blank" rel="noopener noreferrer" class="doc-link">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3H3v10h10V10M9 2h5v5M14 2 7.5 8.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            theses.fr
+          </a>
+          <a href="BeamerPAUTRELv.finale.pdf" target="_blank" rel="noopener noreferrer" class="doc-link">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 3h12v8H2z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M5 14h6M8 11v3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Defense slides
+          </a>
+        </div>
+
+        <div class="meta-grid">
+          <div class="meta-item">
+            <span class="meta-label">Institution</span>
+            IRMAR, University of Rennes
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Supervisors</span>
+            Jürgen Angst, Guillaume Poly
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Keywords</span>
+            <span class="keywords">
+              <span class="kw">nodal sets</span>
+              <span class="kw">random trigonometric polynomials</span>
+              <span class="kw">stationary Gaussian processes</span>
+              <span class="kw">spectral measures</span>
+              <span class="kw">Kac–Rice formula</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <h4 class="theme-subheading">Publications</h4>
+      <ol class="pub-list">
+        <li class="pub-item">
+          <span class="pub-tag pub-status--accepted">To appear</span>
+          <span class="pub-authors">J. Angst, T. Pautrel, G. Poly</span>
+          <span class="pub-title">Global universality of the expected number of zeros of non-analytic random signals</span>
+          <span class="pub-venue">INdAM–Springer Proceedings (2025)</span>
+          <div class="pub-actions">
+            <a href="APP_revision.pdf" target="_blank" rel="noopener noreferrer" class="doc-link">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 1h5.586L13 4.414V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M9 1v4h4M6 9h4M6 11.5h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+              Preprint (PDF)
+            </a>
+          </div>
+        </li>
+        <li class="pub-item">
+          <span class="pub-tag pub-status--published">Published</span>
+          <span class="pub-authors">J. Angst, T. Pautrel, G. Poly</span>
+          <span class="pub-title">Real zeros of random trigonometric polynomials with dependent coefficients</span>
+          <span class="pub-venue"><em>Trans. Amer. Math. Soc.</em> 375 (2022), 7209–7260.
+            <a href="https://www.ams.org/journals/tran/2022-375-10/S0002-9947-2022-08742-0/"
+               target="_blank" rel="noopener noreferrer">journal page</a></span>
+        </li>
+        <li class="pub-item">
+          <span class="pub-tag pub-status--published">Published</span>
+          <span class="pub-authors">T. Pautrel</span>
+          <span class="pub-title">New asymptotics for the mean number of zeros of random trigonometric polynomials with strongly dependent Gaussian coefficients</span>
+          <span class="pub-venue"><em>Electron. Commun. Probab.</em> 25 (2020), no.&nbsp;36.
+            <a href="https://projecteuclid.org/journals/electronic-communications-in-probability/volume-25/issue-none/New-asymptotics-for-the-mean-number-of-zeros-of-random/10.1214/20-ECP314.full"
+               target="_blank" rel="noopener noreferrer">journal page</a></span>
+        </li>
+      </ol>
+
+      <p class="talk-note">
+        Invited speaker at the "UniRandom" thematic week (Rennes, 2019 and 2021).
+        <a href="UNIRANDOMPautrel2021.pdf" target="_blank" rel="noopener noreferrer">Slides</a>.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Thibault Pautrel</p>
+  </footer>
+</body>
+</html>

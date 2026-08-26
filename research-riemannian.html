@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Stochastic optimization on Riemannian manifolds, motivated by sufficient dimension reduction on the Grassmann manifold.">
+  <title>Riemannian stochastic optimization – Thibault Pautrel</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <aside class="site-sidebar">
+    <img class="sidebar-photo" src="photoTP.png" alt="">
+    <h1 class="site-title"><a href="index.html">Thibault Pautrel</a></h1>
+    <p class="sidebar-role">Postdoctoral researcher<br>L2S — CentraleSupélec,<br>Université Paris-Saclay</p>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li>
+          <a href="research.html" class="is-section">Research</a>
+          <ul class="section-index">
+            <li><a href="research-federated.html">Geometry-aware federated learning</a></li>
+            <li><a href="research-riemannian.html" aria-current="page">Riemannian stochastic optimization</a></li>
+            <li><a href="research-random.html">Zeros of random trigonometric functions</a></li>
+          </ul>
+        </li>
+        <li><a href="teaching.html">Teaching</a></li>
+        <li><a href="CVenglish.pdf" target="_blank" rel="noopener noreferrer">CV (PDF)</a></li>
+      </ul>
+    </nav>
+
+    <p class="sidebar-contact">
+      HAL · arXiv<br>
+      GitHub<br>
+      firstname.lastname@centralesupelec.fr
+    </p>
+  </aside>
+
+  <main id="main-content" class="container">
+    <h2 class="page-title">Riemannian stochastic optimization</h2>
+
+    <section id="riem-opt" class="theme-section">
+      <div class="theme-card">
+        <div class="theme-eyebrow">
+        </div>
+        <p>
+          A parallel line of work develops stochastic optimization algorithms on
+          Riemannian manifolds, motivated by sufficient dimension reduction, where the
+          targeted subspace is naturally a point on the Grassmann manifold, represented
+          for computation by an orthonormal basis on the Stiefel manifold. The goal is
+          to recast classical dimension-reduction criteria as smooth functions on this
+          manifold, design stochastic gradient methods that respect its geometry, and
+          establish non-asymptotic convergence rates matching the optimal scaling for
+          non-convex stochastic first-order methods.
+        </p>
+
+        <figure class="theme-figure" aria-labelledby="sdr-fig-caption">
+          <iframe
+            class="figure-embed"
+            src="sdr_surface_3d.html"
+            title="Animated 3D figure: projection onto span(B) and the response surface"
+            loading="lazy"
+            style="width:100%; max-width:820px; aspect-ratio:4/3; border:0; display:block; margin:0 auto;">
+          </iframe>
+          <figcaption id="sdr-fig-caption">
+            Sufficient dimension reduction: each predictor X<sub>i</sub> is projected
+            orthogonally onto the one-dimensional subspace span(B) (green), and the
+            response Y<sub>i</sub> = g(B<sup>⊤</sup>X<sub>i</sub>) is read off the
+            regression surface above the projected point.
+          </figcaption>
+        </figure>
+
+        <div class="meta-grid">
+          <div class="meta-item">
+            <span class="meta-label">Collaborator</span>
+            François Portier (ENSAI / CREST)
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Keywords</span>
+            <span class="keywords">
+              <span class="kw">Riemannian optimization</span>
+              <span class="kw">stochastic gradient methods</span>
+              <span class="kw">Stiefel manifold</span>
+              <span class="kw">sufficient dimension reduction</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <h4 class="theme-subheading">Publications</h4>
+      <ol class="pub-list">
+        <li class="pub-item">
+          <span class="pub-tag pub-status--accepted">Accepted</span>
+          <span class="pub-authors">T. Pautrel, F. Portier</span>
+          <span class="pub-title">Riemannian stochastic optimization for sufficient dimension reduction</span>
+          <span class="pub-venue"><em>ICML 2026</em></span>
+          <div class="pub-badges">
+            <a href="https://arxiv.org/abs/2606.00413" target="_blank" rel="noopener noreferrer"
+               class="repo-badge repo-badge--arxiv" aria-label="arXiv preprint 2606.00413">
+              <span class="repo-badge__label">arXiv</span>
+              <span class="repo-badge__id">2606.00413</span>
+            </a>
+            <a href="https://hal.science/hal-05640656" target="_blank" rel="noopener noreferrer"
+               class="repo-badge repo-badge--hal" aria-label="HAL deposit hal-05640656">
+              <span class="repo-badge__label">HAL</span>
+              <span class="repo-badge__id">hal-05640656</span>
+            </a>
+          </div>
+        </li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Thibault Pautrel</p>
+  </footer>
+</body>
+</html>

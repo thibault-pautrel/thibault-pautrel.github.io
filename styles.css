@@ -860,6 +860,8 @@ main hr {
 
 .figure-fl .fl-pulse {
   fill: none;
+  transform-box: fill-box;
+  transform-origin: center;
   stroke: var(--fl-active);
   stroke-width: 2;
   opacity: 0;
@@ -875,6 +877,8 @@ main hr {
 
 .figure-fl .fl-aggregate {
   fill: none;
+  transform-box: fill-box;
+  transform-origin: center;
   stroke: var(--color-accent);
   stroke-width: 2;
   opacity: 0;

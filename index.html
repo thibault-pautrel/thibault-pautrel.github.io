@@ -12,41 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <style>
-    .home-layout {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 2rem;
-      margin-top: 1.5rem;
-    }
 
-    .home-text {
-      flex: 1;
-    }
-
-    .home-photo {
-      flex-shrink: 0;
-    }
-
-    .home-photo img {
-      width: 150px;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    @media (max-width: 700px) {
-      .home-layout {
-        flex-direction: column-reverse;
-        align-items: flex-start;
-      }
-
-      .home-photo img {
-        width: 140px;
-      }
-    }
-  </style>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -58,38 +24,40 @@
     "name": "Laboratoire des signaux et systèmes (L2S), CentraleSupélec, Université Paris-Saclay"
   },
   "url": "https://thibault-pautrel.github.io",
-  "description": "Postdoctoral researcher in federated learning, Riemannian geometry, and random functions.",
-  ]
+    "description": "Postdoctoral researcher in federated learning, Riemannian geometry, and random functions."
 }
 </script>
 
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="container">
-      <h1 class="site-title">
-        <a href="index.html">Thibault Pautrel</a>
-      </h1>
+   <aside class="site-sidebar">
+    <img class="sidebar-photo" src="photoTP.png" alt="">
+    <h1 class="site-title"><a href="index.html">Thibault Pautrel</a></h1>
+    <p class="sidebar-role">Postdoctoral researcher<br>L2S — CentraleSupélec,<br>Université Paris-Saclay</p>
 
-      <nav class="main-nav" aria-label="Main navigation">
-        <ul>
-          <li><a href="index.html" class="active" aria-current="page">Home</a></li>
-          <li><a href="research.html">Research</a></li>
-          <li><a href="teaching.html">Teaching</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <nav class="main-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="teaching.html">Teaching</a></li>
+        <li><a href="CVenglish.pdf" target="_blank" rel="noopener noreferrer">CV (PDF)</a></li>
+      </ul>
+    </nav>
+
+    <p class="sidebar-contact">
+      HAL · arXiv<br>
+      GitHub<br>
+      firstname.lastname@centralesupelec.fr
+    </p>
+  </aside>
 
   <!-- MAIN CONTENT -->
   <main id="main-content" class="container">
     <h2 class="page-title">Welcome</h2>
 
-    <section class="home-layout" aria-labelledby="intro-heading">
-      <div class="home-text">
-        <h3 id="intro-heading" style="margin-top: 0;">About me</h3>
+    <section aria-labelledby="intro-heading">
+      <h3 id="intro-heading" style="margin-top: 0;">About me</h3>
 
         <p>
           Since October 2025, I have been a postdoctoral researcher at the
@@ -141,10 +109,6 @@
         </p>
       </div>
 
-      <!-- PHOTO SECTION -->
-      <div class="home-photo">
-        <img src="photoTP.png" alt="Portrait of Thibault Pautrel">
-      </div>
     </section>
   </main>
 

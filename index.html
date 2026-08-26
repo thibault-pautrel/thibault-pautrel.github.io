@@ -10,8 +10,7 @@
 
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <script type="application/ld+json">
 {
@@ -24,14 +23,14 @@
     "name": "Laboratoire des signaux et systèmes (L2S), CentraleSupélec, Université Paris-Saclay"
   },
   "url": "https://thibault-pautrel.github.io",
-    "description": "Postdoctoral researcher in federated learning, Riemannian geometry, and random functions."
+  "description": "Postdoctoral researcher in federated learning, Riemannian geometry, and random functions."
 }
 </script>
 
 </head>
 <body>
 
-   <aside class="site-sidebar">
+  <aside class="site-sidebar">
     <img class="sidebar-photo" src="photoTP.png" alt="">
     <h1 class="site-title"><a href="index.html">Thibault Pautrel</a></h1>
     <p class="sidebar-role">Postdoctoral researcher<br>L2S — CentraleSupélec,<br>Université Paris-Saclay</p>
@@ -39,7 +38,14 @@
     <nav class="main-nav" aria-label="Main navigation">
       <ul>
         <li><a href="index.html" class="active" aria-current="page">Home</a></li>
-        <li><a href="research.html">Research</a></li>
+        <li>
+          <a href="research.html">Research</a>
+          <ul class="section-index">
+            <li><a href="research-federated.html">Geometry-aware federated learning</a></li>
+            <li><a href="research-riemannian.html">Riemannian stochastic optimization</a></li>
+            <li><a href="research-random.html">Zeros of random trigonometric functions</a></li>
+          </ul>
+        </li>
         <li><a href="teaching.html">Teaching</a></li>
         <li><a href="CVenglish.pdf" target="_blank" rel="noopener noreferrer">CV (PDF)</a></li>
       </ul>
@@ -52,63 +58,60 @@
     </p>
   </aside>
 
-  <!-- MAIN CONTENT -->
   <main id="main-content" class="container">
     <h2 class="page-title">Welcome</h2>
 
     <section aria-labelledby="intro-heading">
       <h3 id="intro-heading" style="margin-top: 0;">About me</h3>
 
-        <p>
-          Since October 2025, I have been a postdoctoral researcher at the
-          <a href="https://l2s.centralesupelec.fr" target="_blank" rel="noopener noreferrer">
-            L2S research laboratory (CentraleSupélec, Université Paris-Saclay)
-          </a>.
-        </p>
+      <p>
+        Since October 2025, I have been a postdoctoral researcher at the
+        <a href="https://l2s.centralesupelec.fr" target="_blank" rel="noopener noreferrer">
+          L2S research laboratory (CentraleSupélec, Université Paris-Saclay)
+        </a>.
+      </p>
 
-        <p>
-          My current work focuses on federated learning on covariance matrices with
-          <a href="https://ojs.aaai.org/index.php/AAAI/article/view/10866" target="_blank" rel="noopener noreferrer">
-            SPDNet
-          </a>
-          and related Riemannian models, with applications to health data, in particular EEG signals.
-        </p>
+      <p>
+        My current work focuses on federated learning on covariance matrices with
+        <a href="https://ojs.aaai.org/index.php/AAAI/article/view/10866" target="_blank" rel="noopener noreferrer">
+          SPDNet
+        </a>
+        and related Riemannian models, with applications to health data, in particular EEG signals.
+      </p>
 
-        <p>
-          Previously, I completed the Master’s program
-          <em>Statistics for Smart Data</em> at
-          <a href="https://ensai.fr/2-cursus/msc-statistics-for-smart-data/" target="_blank" rel="noopener noreferrer">
-            ENSAI (Rennes)
-          </a>
-          in order to strengthen my background in machine learning and computer science.
-          This training allowed me to transition from my former position as a secondary school
-          mathematics teacher back into academic research.
-        </p>
+      <p>
+        Previously, I completed the Master’s program
+        <em>Statistics for Smart Data</em> at
+        <a href="https://ensai.fr/2-cursus/msc-statistics-for-smart-data/" target="_blank" rel="noopener noreferrer">
+          ENSAI (Rennes)
+        </a>
+        in order to strengthen my background in machine learning and computer science.
+        This training allowed me to transition from my former position as a secondary school
+        mathematics teacher back into academic research.
+      </p>
 
-        <p>
-          In 2022, I obtained my PhD from the University of Rennes for a thesis on the universality
-          of the zeros of random functions. My PhD was supervised by
-          <a href="https://sites.google.com/site/guillaumejpoly/home" target="_blank" rel="noopener noreferrer">
-            Guillaume Poly
-          </a>
-          and
-          <a href="https://angst.pages.math.cnrs.fr" target="_blank" rel="noopener noreferrer">
-            Jürgen Angst
-          </a>.
-          The manuscript is available
-          <a href="https://theses.fr/2022REN1S015" target="_blank" rel="noopener noreferrer">
-            here
-          </a>.
-        </p>
+      <p>
+        In 2022, I obtained my PhD from the University of Rennes for a thesis on the universality
+        of the zeros of random functions. My PhD was supervised by
+        <a href="https://sites.google.com/site/guillaumejpoly/home" target="_blank" rel="noopener noreferrer">
+          Guillaume Poly
+        </a>
+        and
+        <a href="https://angst.pages.math.cnrs.fr" target="_blank" rel="noopener noreferrer">
+          Jürgen Angst
+        </a>.
+        The manuscript is available
+        <a href="https://theses.fr/2022REN1S015" target="_blank" rel="noopener noreferrer">
+          here
+        </a>.
+      </p>
 
-        <p>
-          My curriculum vitae can be found
-          <a href="CVenglish.pdf" target="_blank" rel="noopener noreferrer">here</a> in English
-          and
-          <a href="CVTP.pdf" target="_blank" rel="noopener noreferrer">here</a> in French.
-        </p>
-      </div>
-
+      <p>
+        My curriculum vitae can be found
+        <a href="CVenglish.pdf" target="_blank" rel="noopener noreferrer">here</a> in English
+        and
+        <a href="CVTP.pdf" target="_blank" rel="noopener noreferrer">here</a> in French.
+      </p>
     </section>
   </main>
 
@@ -118,4 +121,3 @@
 
 </body>
 </html>
-

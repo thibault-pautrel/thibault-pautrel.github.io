@@ -11,21 +11,33 @@
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container">
-      <h1 class="site-title">
-        <a href="index.html">Thibault Pautrel</a>
-      </h1>
+    <aside class="site-sidebar">
+    <img class="sidebar-photo" src="photoTP.png" alt="">
+    <h1 class="site-title"><a href="index.html">Thibault Pautrel</a></h1>
+    <p class="sidebar-role">Postdoctoral researcher<br>L2S — CentraleSupélec,<br>Université Paris-Saclay</p>
 
-      <nav class="main-nav" aria-label="Main navigation">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="research.html" class="active" aria-current="page">Research</a></li>
-          <li><a href="teaching.html">Teaching</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <nav class="main-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li>
+          <a href="research.html" class="active" aria-current="page">Research</a>
+          <ul class="section-index">
+            <li><a href="#fedlearning">Federated learning</a></li>
+            <li><a href="#riem-opt">Riemannian optimization</a></li>
+            <li><a href="#random-trig">Random functions</a></li>
+          </ul>
+        </li>
+        <li><a href="teaching.html">Teaching</a></li>
+        <li><a href="CVenglish.pdf" target="_blank" rel="noopener noreferrer">CV (PDF)</a></li>
+      </ul>
+    </nav>
+
+    <p class="sidebar-contact">
+      HAL · arXiv<br>
+      GitHub<br>
+      firstname.lastname@centralesupelec.fr
+    </p>
+  </aside>
 
   <main id="main-content" class="container">
     <h2 class="page-title">Research</h2>

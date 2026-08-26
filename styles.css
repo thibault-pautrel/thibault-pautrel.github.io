@@ -4,14 +4,16 @@
 
 :root {
   --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --color-text: #1f2933;
-  --color-muted: #6b7280;
+    --color-text: #16202b;
+  --color-muted: #5b6472;
   --color-border: #e5e7eb;
-  --color-accent: #276fbf;      /* Main accent blue */
-  --color-accent-soft: #e3efff; /* Soft blue background */
-  --color-header-bg: #f9fafb;
-  --color-body-bg: #f3f4f6;
+  --color-accent: #1d5fa8;      /* Main accent blue */
+  --color-accent-soft: #eaf1f9; /* Soft blue background */
+  --color-header-bg: #f4f7fa;
+  --color-body-bg: #ffffff;
   --color-card-bg: #ffffff;
+  --color-sidebar-bg: #f4f7fa;
+  --sidebar-width: 232px;
   --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.06);
   --radius-lg: 12px;
   --radius-md: 8px;
@@ -36,12 +38,16 @@ body {
   color: var(--color-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  display: grid;
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+  grid-template-rows: 1fr auto;
+  min-height: 100vh;
 }
 
 .container {
-  max-width: 960px;
+  max-width: 780px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1.75rem;
 }
 
 /* =========================
@@ -129,88 +135,119 @@ main li {
 }
 
 /* =========================
-   Header + Navigation
+   Sidebar + Navigation
    ========================= */
 
-header,
-.site-header {
-  background-color: var(--color-header-bg);
-  border-bottom: 1px solid var(--color-border);
+.site-sidebar {
+  grid-row: 1 / -1;
+  background-color: var(--color-sidebar-bg);
+  border-right: 1px solid var(--color-border);
+  padding: 2rem 1.5rem;
+  position: sticky;
+  top: 0;
+  align-self: start;
+  max-height: 100vh;
+  overflow-y: auto;
 }
 
-.site-header .container,
-header .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  gap: 1rem;
+.sidebar-photo {
+  width: 92px;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+  margin-bottom: 1rem;
 }
 
 .site-title {
-  margin: 0;
+  margin: 0 0 0.15rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0;
 }
 
-.site-title a {
-  color: #111827;
+.site-title a,
+.site-title a:hover,
+.site-title a:focus-visible {
+  color: var(--color-text);
   text-decoration: none;
 }
 
-.site-title a:hover,
-.site-title a:focus-visible {
-  color: #111827;
+.sidebar-role {
+  margin: 0 0 1.75rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--color-muted);
 }
 
-nav,
-.main-nav {
-  font-size: 0.95rem;
-}
-
-nav ul,
 .main-nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
 }
 
-nav li,
 .main-nav li {
-  margin: 0;
+  margin: 0 0 0.15rem;
 }
 
-nav a,
 .main-nav a {
-  display: inline-block;
-  padding: 0.45rem 0.9rem;
-  border-radius: 999px;
+  display: block;
+  font-size: 0.92rem;
   font-weight: 500;
   color: var(--color-muted);
-  background: transparent;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    transform 0.1s ease;
+  padding: 0.3rem 0 0.3rem 0.7rem;
+  margin-left: -0.7rem;
+  border-left: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
 
-nav a:hover,
-nav a:focus-visible,
 .main-nav a:hover,
 .main-nav a:focus-visible {
-  background-color: var(--color-accent-soft);
   color: var(--color-accent);
-  transform: translateY(-1px);
 }
 
-nav a.active,
 .main-nav a.active,
-nav a[aria-current="page"],
 .main-nav a[aria-current="page"] {
-  background-color: var(--color-accent);
-  color: #ffffff;
+  color: var(--color-accent);
+  border-left-color: var(--color-accent);
+}
+
+/* Section index, nested under the active page */
+.section-index {
+  list-style: none;
+  margin: 0.15rem 0 0.5rem;
+  padding: 0 0 0 0.95rem;
+}
+
+.section-index a {
+  display: block;
+  font-size: 0.83rem;
+  font-weight: 400;
+  color: var(--color-muted);
+  padding: 0.18rem 0;
+  margin-left: 0;
+  border-left: none;
+}
+
+.section-index a:hover,
+.section-index a.is-current {
+  color: var(--color-text);
+}
+
+.sidebar-contact {
+  margin-top: 1.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: var(--color-muted);
+}
+
+.sidebar-contact a {
+  color: var(--color-muted);
+}
+
+.sidebar-contact a:hover {
+  color: var(--color-accent);
 }
 
 /* =========================
@@ -218,12 +255,11 @@ nav a[aria-current="page"],
    ========================= */
 
 main {
-  max-width: 960px;
-  margin: 2.5rem auto 3rem;
-  padding: 2rem 1.75rem;
-  background-color: var(--color-card-bg);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
+  margin: 0;
+  padding: 2.75rem 0 3rem;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .page-title {
@@ -875,31 +911,60 @@ main hr {
 
 .site-footer {
   text-align: center;
-  padding: 1.5rem 1rem 2rem;
-  font-size: 0.9rem;
+  padding: 1.5rem 1.5rem 2rem;
+  font-size: 0.85rem;
   color: var(--color-muted);
+  border-top: 1px solid var(--color-border);
 }
 
 /* =========================
    Responsive
    ========================= */
 
-@media (max-width: 700px) {
-  .site-header .container,
-  header .container {
-    flex-direction: column;
-    align-items: flex-start;
+@media (max-width: 860px) {
+  body {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;
   }
 
-  nav ul,
+  .site-sidebar {
+    grid-row: auto;
+    position: static;
+    max-height: none;
+    overflow: visible;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .sidebar-photo,
+  .sidebar-role,
+  .section-index,
+  .sidebar-contact {
+    display: none;
+  }
+
   .main-nav ul {
+    display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    gap: 0 1.1rem;
+    margin-top: 0.5rem;
+  }
+
+  .main-nav a {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .main-nav a.active,
+  .main-nav a[aria-current="page"] {
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 
   main {
-    margin: 1.5rem auto 2.5rem;
-    padding: 1.5rem 1.25rem;
+    padding: 1.75rem 0 2.5rem;
   }
 
   h1 {

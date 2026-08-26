@@ -4,7 +4,7 @@
 
 :root {
   --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    --color-text: #16202b;
+  --color-text: #16202b;
   --color-muted: #5b6472;
   --color-border: #e5e7eb;
   --color-accent: #1d5fa8;      /* Main accent blue */
@@ -119,8 +119,7 @@ a:focus-visible::after {
 }
 
 nav a::after,
-.main-nav a::after,
-.theme-nav a::after {
+.main-nav a::after {
   display: none;
 }
 
@@ -211,26 +210,44 @@ main li {
   border-left-color: var(--color-accent);
 }
 
-/* Section index, nested under the active page */
+/* Section index: one entry per research sub-page */
 .section-index {
   list-style: none;
-  margin: 0.15rem 0 0.5rem;
-  padding: 0 0 0 0.95rem;
+  margin: 0.3rem 0 0.65rem 0.3rem;
+  padding: 0 0 0 0.85rem;
+  border-left: 1px solid var(--color-border);
+}
+
+.section-index li {
+  margin: 0;
 }
 
 .section-index a {
   display: block;
-  font-size: 0.83rem;
+  font-size: 0.82rem;
   font-weight: 400;
+  line-height: 1.35;
   color: var(--color-muted);
-  padding: 0.18rem 0;
-  margin-left: 0;
-  border-left: none;
+  padding: 0.3rem 0 0.3rem 0.6rem;
+  margin-left: -0.85rem;
+  border-left: 2px solid transparent;
 }
 
 .section-index a:hover,
-.section-index a.is-current {
-  color: var(--color-text);
+.section-index a:focus-visible {
+  color: var(--color-accent);
+}
+
+.section-index a[aria-current="page"] {
+  color: var(--color-accent);
+  font-weight: 500;
+  border-left-color: var(--color-accent);
+}
+
+/* Parent entry when a child page is open */
+.main-nav > ul > li > a.is-section {
+  color: var(--color-accent);
+  font-weight: 600;
 }
 
 .sidebar-contact {
@@ -285,7 +302,7 @@ main section {
 }
 
 /* =========================
-   Research intro + theme anchor nav
+   Research intro + theme list
    ========================= */
 
 .research-intro {
@@ -296,39 +313,35 @@ main section {
   max-width: 65ch;
 }
 
-.theme-nav {
-  margin: 0 0 2.25rem;
-}
-
-.theme-nav ul {
+.theme-list {
   list-style: none;
+  margin: 2rem 0 0;
   padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
 }
 
-.theme-nav li {
+.theme-list li {
   margin: 0;
+  padding: 1.15rem 0;
+  border-top: 1px solid var(--color-border);
 }
 
-.theme-nav a {
-  display: inline-block;
-  padding: 0.45rem 0.9rem;
-  border-radius: 999px;
-  font-size: 0.88rem;
+.theme-list li:last-child {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.theme-list a {
+  display: block;
+  font-size: 1.05rem;
   font-weight: 500;
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
-  border: 1px solid transparent;
-  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+  margin-bottom: 0.3rem;
 }
 
-.theme-nav a:hover,
-.theme-nav a:focus-visible {
-  border-color: var(--color-accent);
-  transform: translateY(-1px);
+.theme-list span {
+  display: block;
+  max-width: 62ch;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--color-muted);
 }
 
 /* =========================
@@ -939,16 +952,14 @@ main hr {
 
   .sidebar-photo,
   .sidebar-role,
-  .section-index,
   .sidebar-contact {
     display: none;
   }
 
-  .main-nav ul {
+  .main-nav > ul {
     display: flex;
     flex-wrap: wrap;
     gap: 0 1.1rem;
-    margin-top: 0.5rem;
   }
 
   .main-nav a {
@@ -961,6 +972,10 @@ main hr {
   .main-nav a[aria-current="page"] {
     text-decoration: underline;
     text-underline-offset: 4px;
+  }
+
+  .section-index {
+    display: none;
   }
 
   main {
@@ -979,8 +994,4 @@ main hr {
     font-size: 1.2rem;
   }
 
-  .theme-nav a {
-    font-size: 0.82rem;
-    padding: 0.4rem 0.75rem;
-  }
 }

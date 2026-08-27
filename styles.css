@@ -557,6 +557,7 @@ main section {
   margin: 0.5rem 0 0;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.3em;
 }
 

@@ -581,6 +581,11 @@ main section {
   margin-bottom: 0.75rem;
 }
 
+.pub-status--preprint {
+  color: #475569;
+  background: #eef2f6;
+}
+
 .pub-status--submitted {
   color: #b45309;
   background: #fef3c7;

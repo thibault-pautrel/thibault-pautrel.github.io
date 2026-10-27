@@ -1078,3 +1078,142 @@ main hr {
   }
 
 }
+/* =========================
+   Internship announcement banner
+   Loaded after styles.css
+   ========================= */
+
+.offer-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  margin: 1.75rem 0 2.25rem;
+  padding: 1.35rem 1.5rem;
+  border-radius: var(--radius-lg);
+  color: #ffffff;
+  background: linear-gradient(120deg, #123f73 0%, var(--color-accent) 55%, #2b86c9 100%);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+/* Decorative glow */
+.offer-banner::before {
+  content: "";
+  position: absolute;
+  top: -60%;
+  right: -8%;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+}
+
+.offer-text {
+  position: relative;
+  flex: 1 1 320px;
+  min-width: 0;
+}
+
+.offer-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.45rem;
+  padding: 0.15rem 0.7rem 0.15rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+}
+
+.offer-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #5eead4;
+  animation: offer-pulse 2s ease-out infinite;
+}
+
+@keyframes offer-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(94, 234, 212, 0.7); }
+  100% { box-shadow: 0 0 0 0.6rem rgba(94, 234, 212, 0); }
+}
+
+.offer-title {
+  margin: 0 0 0.35rem;
+  padding: 0;
+  border: none;
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #ffffff;
+}
+
+.offer-meta {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.offer-btn {
+  position: relative;
+  flex: 0 0 auto;
+  display: inline-block;
+  padding: 0.65rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #123f73;
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.offer-btn::after {
+  display: none;
+}
+
+.offer-btn:hover,
+.offer-btn:focus-visible {
+  color: #123f73;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+}
+
+.offer-btn:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
+@media (max-width: 560px) {
+  .offer-banner {
+    padding: 1.15rem 1.15rem;
+  }
+
+  .offer-title {
+    font-size: 1.15rem;
+  }
+
+  .offer-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .offer-dot {
+    animation: none;
+  }
+
+  .offer-btn {
+    transition: none;
+  }
+}
